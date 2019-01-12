@@ -1,0 +1,7 @@
+1. How many total thread blocks do we use?
+[(1000-1)/256]+1=4
+
+2. Are all thread blocks full? That is, do all threads in the thread block have data to operate on?
+No. 4 thread blocks are used for this program, so there are 4*256-1000=24 threads that have no data to operate on.
+
+3. How can this basic vector add program be improved? (What changes do you think can be made to speed up the code?)
