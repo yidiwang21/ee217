@@ -5,3 +5,4 @@
 No. 4 thread blocks are used for this program, so there are 4*256-1000=24 threads that have no data to operate on.
 
 3. How can this basic vector add program be improved? (What changes do you think can be made to speed up the code?)
+In the code, we assume that the grid size is large enough to cover all elements in the array, so that the arrays can be processed in a single pass. It takes time to create and destroy the threads. If we can reuse the threads by limiting the size of the grid, though the arrays may not be able to be processed in a single pass, the cost of time will be amortized.
