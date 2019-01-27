@@ -17,7 +17,13 @@ __global__ void reduction(float *out, float *in, unsigned size)
     ********************************************************************/
 
     // INSERT KERNEL CODE HERE
-    extern __shared__ float partialSum[2*BLOCK_SIZE];
+    int SHARED_SIZE = 2 * BLOCK_SIZE;
+    __shared__ float partialSum[SHARED_SIZE];
+    
+    if (SHARED_SIZE != blockDim.x)
+        for (int i = threadIdx.x; i < SHARED_SIZE; i += blockDim.x) 
+            partialSum[i] = 0;
+    __syncthreads();
 
     unsigned int t = threadIdx.x;
     unsigned int start = 2 * blockIdx.x * blockDim.x;

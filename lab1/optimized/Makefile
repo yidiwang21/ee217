@@ -4,6 +4,7 @@ NVCC_FLAGS  = -O3 -I/usr/local/cuda/include
 LD_FLAGS    = -lcudart -L/usr/local/cuda/lib64
 EXE	        = reduction
 OBJ	        = main.o support.o
+ARCH		= -arch=sm_21
 
 default: $(EXE)
 
@@ -14,7 +15,7 @@ support.o: support.cu support.h
 	$(NVCC) -c -o $@ support.cu $(NVCC_FLAGS)
 
 $(EXE): $(OBJ)
-	$(NVCC) $(OBJ) -o $(EXE) $(LD_FLAGS)
+	$(NVCC) $(ARCH) $(OBJ) -o $(EXE) $(LD_FLAGS)
 
 clean:
 	rm -rf *.o $(EXE)
