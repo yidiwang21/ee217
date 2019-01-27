@@ -17,19 +17,19 @@ __global__ void reduction(float *out, float *in, unsigned size)
     ********************************************************************/
 
     // INSERT KERNEL CODE HERE
-    extern __shared__ float partialSum[2 * BLOCK_SIZE];
+    extern __shared__ float partialSum[2*BLOCK_SIZE];
 
-    unsigned int tid = threadIdx.x;
+    unsigned int t = threadIdx.x;
     unsigned int start = 2 * blockIdx.x * blockDim.x;
-    partialSum[tid] = in[start + tid];
-    partialSum[blockDim.x + tid] = in[start + blockDim.x + tid];
+    partialSum[t] = in[start + t];
+    partialSum[blockDim.x + t] = in[start + blockDim.x + t];
 
-    for(unsigned int stride = 1; stride <= blockDim.x; stride *= 2) {
+    for (unsigned int stride = 1; stride <= blockDim.x; stride *= 2) {
         __syncthreads();
-        if(tid % stride == 0)
-            partialSum[2 * tid] += partialSum[2 * tid + stride];
+        if (t % stride == 0)
+            partialSum[2 * t] += partialSum[2 * t + stride];
     }
 
-    if(tid == 0)
+    if (t == 0)
         out[blockIdx.x] = partialSum[0];
 }
