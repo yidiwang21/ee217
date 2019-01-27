@@ -17,13 +17,10 @@ __global__ void reduction(float *out, float *in, unsigned size)
     ********************************************************************/
 
     // INSERT KERNEL CODE HERE
-    int SHARED_SIZE = 2 * BLOCK_SIZE;
-    __shared__ float partialSum[];
+    __shared__ float partialSum[2*BLOCK_SIZE];
 
-    if (SHARED_SIZE != blockDim.x)
-        for (int i = threadIdx.x; i < SHARED_SIZE; i += blockDim.x) 
-            partialSum[i] = 0;
-    __syncthreads();
+    unsigned int full_block_num = sizeof(in) / (2 * blockDim.x);
+    unsigned int lazy_thread_num = blockDim.x - (sizeof(in) % (2 * blockDim.x)) / 2;
 
     unsigned int t = threadIdx.x;
     unsigned int start = 2 * blockIdx.x * blockDim.x;
@@ -32,8 +29,10 @@ __global__ void reduction(float *out, float *in, unsigned size)
 
     for (unsigned int stride = blockDim.x; stride >= 1; stride /= 2) {
         __syncthreads();
-        if (t < stride)
-            partialSum[t] += partialSum[t + stride];
+        if (t < stride) {
+            if (blockIdx.x <= full_block_num - 1 || t < blockDim.x - lazy_thread_num)
+                partialSum[t] += partialSum[t + stride];
+        }
     }
 
     if (t == 0)
