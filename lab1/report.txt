@@ -1,0 +1,16 @@
+Lab1 Report
+
+1. For the naive reduction kernel, how many steps execute without divergence? How many steps execute with divergence? <br/>
+2141486 steps without divergence, and 1119642 steps with divergence.
+
+2. For the optimized reduction kernel, how many steps execute without divergence? How many steps execute with divergence? <br/>
+2993416 steps without divergence, and 44942 steps with divergence.
+
+3. Which kernel performed better? (for both real GPUs and GPGPU-Sim) <br/>
+The optimized kernel works better. It has an IPC of 758.4977, while the naive kernel has an IPC of 563.5098.
+
+4. How does the warp occupancy distribution compare between the two Reduction implementations? <br/>
+The times of not all the threads are active of the naive implementation is more than the optimized approach.
+
+5. Why do GPGPUs suffer from warp divergence? <br/>
+Wrap divergence occurs when difference threads in the same wrap need to do different things. Different execution path leads to performance loss.
