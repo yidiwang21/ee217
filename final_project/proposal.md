@@ -1,3 +1,5 @@
-## Topic: GPU kernels scheduling to reduce power consumption
+## Topic: Kernels scheduling to improve GPU utilization
 Group member: Yidi Wang
 
+By default, the kernels in the waitlist will be executed in sequence, which might result in a poor utilization. For example, the maximum utilization of a GPU is 100%, and we have three kernels k1, k2 and k3 with the same execution time ```t``` to be scheduled. None of them will use 100% of the number of ALUs in the GPU: k1 will use 30% of ALUs, k2 50%, and k3 80%. The order in the waitlist is ```[k1, k3, k2]```, then the total execution time will be ```3*t``` without improvement. However, if k1 and k2 can run simultaneously, followed by k3, the total execution time will be reduced to ```2*t```.
+In this project, I want to implement an application to schedule the kernels to improve GPU utilization and reduce the total execution time as long as we know the kernels' utilization and arriving time in the waitlist.
