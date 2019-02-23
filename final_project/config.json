@@ -1,6 +1,21 @@
 {
-    "kernel_name":  "k1",
-    "kernel_id":    "1",
-    "block_num":    "1",    
-    "thread_num":   "512"
+    "name": "Kernel Scheduling",
+    "kernel_number": 4,
+    "iterations": 1,
+    "multikernel":[
+        {
+            "kernel_name":  "k1",
+            "kernel_id":    "1",
+            "grid_size":    "2",    
+            "block_size":   "32",
+            "shared_mem":   "0"
+        },
+        {
+            "kernel_name":  "k2",
+            "kernel_id":    "2",
+            "grid_size":    "400",    
+            "block_size":   "32",
+            "shared_mem":   "0"
+        }
+    ]
 }
