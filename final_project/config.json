@@ -8,6 +8,7 @@
             "kernel_id":    "1",
             "grid_size":    "2",    
             "block_size":   "32",
+            "duration":     "0",
             "shared_mem":   "0"
         },
         {
@@ -15,6 +16,7 @@
             "kernel_id":    "2",
             "grid_size":    "400",    
             "block_size":   "32",
+            "duration":     "0",
             "shared_mem":   "0"
         }
     ]
