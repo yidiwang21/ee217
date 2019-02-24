@@ -4,7 +4,7 @@
 #define ITER_NUM    1024 * 8
 #define STREAM_NUM  4
 #define BLOCK_SIZE  32
-#define GRID_SIZE   400
+#define GRID_SIZE   2
 #define VEC_SIZE    1000
 
 
@@ -51,13 +51,18 @@ int main() {
     cudaStream_t streams[STREAM_NUM];
     for (int i = 0; i < STREAM_NUM; i++) {
         cudaStreamCreateWithFlags(&streams[i], cudaStreamNonBlocking);
+        printf("streams[%d] = %d", i, streams[i]);
     }
 
     cudaDeviceSynchronize();
-    dummyKernel <<<GRID_SIZE, BLOCK_SIZE, 0, streams[0]>>>(A_d, B_d, C_d, VEC_SIZE);
-    dummyKernel <<<GRID_SIZE, BLOCK_SIZE, 0, streams[1]>>>(A_d, B_d, C_d, VEC_SIZE);
-    dummyKernel <<<GRID_SIZE, BLOCK_SIZE, 0, streams[2]>>>(A_d, B_d, C_d, VEC_SIZE);
-    dummyKernel <<<GRID_SIZE, BLOCK_SIZE, 0, streams[3]>>>(A_d, B_d, C_d, VEC_SIZE);
+
+    for (int i = 0; i < STREAM_NUM; i++) {
+        dummyKernel <<<GRID_SIZE, BLOCK_SIZE, 0, streams[i]>>>(A_d, B_d, C_d, VEC_SIZE);
+    }
+    // dummyKernel <<<GRID_SIZE, BLOCK_SIZE, 0, streams[0]>>>(A_d, B_d, C_d, VEC_SIZE);
+    // dummyKernel <<<GRID_SIZE, BLOCK_SIZE, 0, streams[1]>>>(A_d, B_d, C_d, VEC_SIZE);
+    // dummyKernel <<<GRID_SIZE, BLOCK_SIZE, 0, streams[2]>>>(A_d, B_d, C_d, VEC_SIZE);
+    // dummyKernel <<<GRID_SIZE, BLOCK_SIZE, 0, streams[3]>>>(A_d, B_d, C_d, VEC_SIZE);
     
     cudaDeviceSynchronize();
 

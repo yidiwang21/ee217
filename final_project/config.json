@@ -1,23 +1,48 @@
 {
     "name": "Kernel Scheduling",
-    "kernel_number": 4,
-    "iterations": 1,
-    "multikernel":[
+    "kernel_number": 5,
+    "iterations": 2,
+    "sched_policy": 2,
+    "kernel_entry": [
         {
             "kernel_name":  "k1",
-            "kernel_id":    "1",
-            "grid_size":    "2",    
-            "block_size":   "32",
-            "duration":     "0",
-            "shared_mem":   "0"
+            "kernel_id":    1,
+            "grid_size":    2,    
+            "block_size":   32,
+            "duration":     0,
+            "shared_mem":   0
         },
         {
             "kernel_name":  "k2",
-            "kernel_id":    "2",
-            "grid_size":    "400",    
-            "block_size":   "32",
-            "duration":     "0",
-            "shared_mem":   "0"
+            "kernel_id":    2,
+            "grid_size":    400,    
+            "block_size":   32,
+            "duration":     0,
+            "shared_mem":   16384
+        },
+        {
+            "kernel_name":  "k3",
+            "kernel_id":    3,
+            "grid_size":    1,    
+            "block_size":   512,
+            "duration":     0,
+            "shared_mem":   4096
+        },
+        {
+            "kernel_name":  "k4",
+            "kernel_id":    4,
+            "grid_size":    100,    
+            "block_size":   128,
+            "duration":     0,
+            "shared_mem":   0
+        },
+        {
+            "kernel_name":  "k5",
+            "kernel_id":    5,
+            "grid_size":    400,    
+            "block_size":   32,
+            "duration":     0,
+            "shared_mem":   1024
         }
     ]
 }
