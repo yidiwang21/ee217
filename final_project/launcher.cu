@@ -57,15 +57,15 @@ void release(int idx, void* stream_id, int *in, int n) {
             // kernel_shared_mem_4096 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 4096, stream_id>>> (in, n, kernel_config_tmp.duration);
             lazyKernel_4096 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 4096, stream_id>>> (kernel_config_tmp.duration);
             break;
+        case 8192:
+            printf("    Shared mem size = 8192\n");
+            // kernel_shared_mem_4096 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 4096, stream_id>>> (in, n, kernel_config_tmp.duration);
+            lazyKernel_8192 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 8192, stream_id>>> (kernel_config_tmp.duration);
+            break;
         case 16384:
             printf("    Shared mem size = 16348\n");
             // kernel_shared_mem_16384 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 16384, stream_id>>> (in, n, kernel_config_tmp.duration);
             lazyKernel_16384 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 16384, stream_id>>> (kernel_config_tmp.duration);
-            break;
-        case 49152:
-            printf("    Shared mem size = 49152\n");
-            // kernel_shared_mem_49152 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 49152, stream_id>>> (in, n, kernel_config_tmp.duration);
-            lazyKernel_49152 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 49152, stream_id>>> (kernel_config_tmp.duration);
             break;
         default:
             fprintf(stderr, "# Invalid shared memory size!\n");
@@ -97,7 +97,7 @@ void sort_with_used_shared_mem(KernelInfo *kernel_config, int size) {
     do {
         swapped = false;
         for (int i = 0; i < size - 1; i++) {
-            if (kernel_config[i].grid_size * kernel_config[i].shared_mem < kernel_config[i+1].grid_size * kernel_config[i+1].shared_mem) {
+            if (kernel_config[i].shared_mem < kernel_config[i+1].shared_mem) {
                 std::swap(kernel_config[i], kernel_config[i+1]);
                 swapped = true; 
             }
