@@ -62,19 +62,7 @@ __global__ void kernel_shared_mem_16384(int *d, int n, int delay) {
     d[t] = SharedMemArr[tr];
 }
 
-__global__ void kernel_shared_mem_49152(int *d, int n, int delay) {
-    __shared__ uint8_t SharedMemArr[49152];
-    int t = threadIdx.x;
-    int tr = n - t - 1;
-    SharedMemArr[t] = d[t];
-    __syncthreads();
-    
-    unsigned int start = kernelTimer();
-    while (kernelTimer() - start < delay);
-    unsigned int stop = kernelTimer();
 
-    d[t] = SharedMemArr[tr];
-}
 
 __global__ void lazyKernel_0(int delay) {
     int bytes_per_thread = 0;
@@ -120,20 +108,6 @@ __global__ void lazyKernel_16384(int delay) {
  
     // do something boring!
     int bytes_per_thread = 16384 / blockDim.x;
-    for (int j = 0; j < ITER_NUM; j++) {
-        for (unsigned int i = 0; i < bytes_per_thread; i++) 
-            SharedMemArr[bytes_per_thread * threadIdx.x + i] = i;
-    }
-
-    unsigned int start = kernelTimer();
-    while (kernelTimer() - start < delay);
-    unsigned int stop = kernelTimer();
-}
-
-__global__ void lazyKernel_49152(int delay) {
-    __shared__ uint8_t SharedMemArr[49152];
- 
-    int bytes_per_thread = 49152 / blockDim.x;
     for (int j = 0; j < ITER_NUM; j++) {
         for (unsigned int i = 0; i < bytes_per_thread; i++) 
             SharedMemArr[bytes_per_thread * threadIdx.x + i] = i;

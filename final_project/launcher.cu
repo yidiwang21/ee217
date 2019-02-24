@@ -205,7 +205,7 @@ int scheduler(char *config_file, int *in_d, int n) {
     // Step 2: scheduling algorithm
     // TODO:
     // How to know the number of registers a kernel is going to use?
-    // How to sort the kernels based on their "size"? (two metrics)
+    // How to sort the kernels based on their "size"? (three metrics)
     // Don't need to control release time, just need re-order
 
 
@@ -222,7 +222,7 @@ int scheduler(char *config_file, int *in_d, int n) {
     cudaDeviceSynchronize();
 
     // Scheduling Begins Here
-    // suppose that all the kernels arriving at the same time
+    // FIXME: suppose that all kernels arriving at the same time
 
     switch(benchmark_config.sched_policy) {
         case 0: 
@@ -235,28 +235,27 @@ int scheduler(char *config_file, int *in_d, int n) {
             sort_with_used_shared_mem(kernel_config, KERNEL_NUM);
             break;
         default:
-            fprintf(stderr, "# Invalid policy!");
+            fprintf(stderr, "# Invalid policy!\n");
             exit(-1);
     }
     // Policy 1: sort based on available thread number
     // samller (gridsize * blocksize) goes first
-    
+    // Policy 2: sort baesed on shared memory size
+    // smaller (shared_mem * grid_size) goes first
     benchmark_config.kernel_config = kernel_config;
 
     for (int idx = 0; idx < KERNEL_NUM; idx++) {
-        // release(kernel_config[i].kernel_id, input_struct);
         release(idx, streams[idx], in_d, n);   // release i th kernel in the sorted quue
         // cuda_ret = cudaDeviceSynchronize();
         // if(cuda_ret != cudaSuccess) fprintf(stderr, "Unable to launch kernel!\n");
     }
+    cudaDeviceSynchronize();
+
+    // Clean up works
     CleanUp(parser, kernel_config);
     for (int i = 0; i < KERNEL_NUM; i++) cudaStreamDestroy(streams[i]);
     
-
-    // Policy 2: sort baesed on shared memory size
-    // smaller (shared_mem * grid_size) goes first
-
-    // TODO: for each SM
+    // TODO: for each SM?
 
     return 0;
 }
