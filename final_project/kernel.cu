@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include "support.cu"
 
-#define ITER_NUM    10000
+#define ITER_NUM    10000   // just an amplifier
 
 // My kernels do something meaningless like reversing content in shared memory
 // just spin for a while and allocate some shared memory
@@ -62,7 +62,7 @@ __global__ void kernel_shared_mem_16384(int *d, int n, int delay) {
     d[t] = SharedMemArr[tr];
 }
 
-
+// TODO: compute exe time for each block
 
 __global__ void lazyKernel_0(int delay) {
     int bytes_per_thread = 0;
@@ -93,6 +93,20 @@ __global__ void lazyKernel_4096(int delay) {
     __shared__ uint8_t SharedMemArr[4096];
  
     int bytes_per_thread = 4096 / blockDim.x;
+    for (int j = 0; j < ITER_NUM; j++) {
+        for (unsigned int i = 0; i < bytes_per_thread; i++) 
+            SharedMemArr[bytes_per_thread * threadIdx.x + i] = i;
+    }
+
+    unsigned int start = kernelTimer();
+    while (kernelTimer() - start < delay);
+    unsigned int stop = kernelTimer();
+}
+
+__global__ void lazyKernel_8192(int delay) {
+    __shared__ uint8_t SharedMemArr[8192];
+ 
+    int bytes_per_thread = 8192 / blockDim.x;
     for (int j = 0; j < ITER_NUM; j++) {
         for (unsigned int i = 0; i < bytes_per_thread; i++) 
             SharedMemArr[bytes_per_thread * threadIdx.x + i] = i;
