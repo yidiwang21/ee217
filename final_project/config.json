@@ -15,7 +15,7 @@
         {
             "kernel_name":  "k2",
             "kernel_id":    2,
-            "grid_size":    400,    
+            "grid_size":    4,    
             "block_size":   32,
             "duration":     0,
             "shared_mem":   16384
@@ -34,7 +34,7 @@
             "grid_size":    100,    
             "block_size":   128,
             "duration":     0,
-            "shared_mem":   0
+            "shared_mem":   8192
         },
         {
             "kernel_name":  "k5",
