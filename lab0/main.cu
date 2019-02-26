@@ -32,7 +32,7 @@ int main (int argc, char *argv[])
     dim3 dim_grid, dim_block;
 
     if (argc == 1) {
-        VecSize = 1000;
+        VecSize = 1000000;
 
       } else if (argc == 2) {
       VecSize = atoi(argv[1]);   
@@ -91,7 +91,11 @@ int main (int argc, char *argv[])
     basicVecAdd(A_d, B_d, C_d, VecSize); //In kernel.cu
 
     cuda_ret = cudaDeviceSynchronize();
-	if(cuda_ret != cudaSuccess) FATAL("Unable to launch kernel");
+	if(cuda_ret != cudaSuccess) {
+        // FATAL("Unable to launch kernel");
+        fprintf(stderr, "Unable to launch kernel\n");
+        exit(-1);
+    }
     stopTime(&timer); printf("%f s\n", elapsedTime(timer));
 
     // Copy device variables from host ----------------------------------------
@@ -108,7 +112,6 @@ int main (int argc, char *argv[])
     // Verify correctness -----------------------------------------------------
 
     printf("Verifying results..."); fflush(stdout);
-
     verify(A_h, B_h, C_h, VecSize);
 
 

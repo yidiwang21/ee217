@@ -103,8 +103,8 @@ int main (int argc, char *argv[])
     cudaDeviceSynchronize();
     stopTime(&timer); printf("%f s\n", elapsedTime(timer));
 
-    printf("Verifying results..."); fflush(stdout);
-    verify(A, B, C, VecSize);
+    // printf("Verifying results..."); fflush(stdout);
+    // verify(A, B, C, VecSize);
 
     free(A); 
     free(B);

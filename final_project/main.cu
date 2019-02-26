@@ -7,7 +7,7 @@
 
 int main (int argc, char *argv[]) {
     // read kernel config file
-    FILE *f = fopen("config.json", "rb");
+    FILE *f = fopen("config/config.json", "rb");
     fseek(f, 0, SEEK_END);
     long fsize = ftell(f);
     fseek(f, 0, SEEK_SET);

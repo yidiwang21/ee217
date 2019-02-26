@@ -66,12 +66,16 @@ __global__ void kernel_shared_mem_16384(int *d, int n, int delay) {
 
 __global__ void lazyKernel_0(int delay) {
     int bytes_per_thread = 0;
-    for (int j = 0; j < ITER_NUM; j++) {
-        bytes_per_thread = j;
-    }
+    // for (int j = 0; j < ITER_NUM; j++) {
+    //     bytes_per_thread = threadIdx.x;
+    // }
 
     unsigned int start = kernelTimer();
-    while (kernelTimer() - start < delay);
+    while (kernelTimer() - start < delay){
+        for (int j = 0; j < ITER_NUM; j++) {
+            bytes_per_thread = threadIdx.x + blockDim.x * gridDim.x;
+        }
+    }
     unsigned int stop = kernelTimer();
 }
 
