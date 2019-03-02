@@ -1,0 +1,1489 @@
+Launching kernel...
+=========================================
+kernel id: 0
+Duration: 2.656000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+
+=========================================
+kernel id: 1
+Duration: 6.304000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+
+=========================================
+kernel id: 2
+Duration: 2.400000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+
+=========================================
+kernel id: 3
+Duration: 2.432000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+
+=========================================
+kernel id: 4
+Duration: 2.464000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+
+=========================================
+kernel id: 5
+Duration: 2.400000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+
+=========================================
+kernel id: 6
+Duration: 2.400000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+
+=========================================
+kernel id: 7
+Duration: 2.400000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+
+=========================================
+kernel id: 8
+Duration: 2.464000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+
+=========================================
+kernel id: 9
+Duration: 2.528000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+
+=========================================
+kernel id: 10
+Duration: 2.464000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+
+=========================================
+kernel id: 11
+Duration: 2.400000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+
+=========================================
+kernel id: 12
+Duration: 2.464000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+
+=========================================
+kernel id: 13
+Duration: 2.464000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+
+=========================================
+kernel id: 14
+Duration: 2.464000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+
+=========================================
+kernel id: 15
+Duration: 2.432000
+Block index: 0
+SM id: 10
+start time: 1801232696
+stop time: 1869080295
+elapsed time: 67847599
+
+Block index: 1
+SM id: 5
+start time: 1754967723
+stop time: 1822814857
+elapsed time: 67847134
+
+Block index: 2
+SM id: 11
+start time: 1754968064
+stop time: 1822815432
+elapsed time: 67847368
+
+Block index: 3
+SM id: 14
+start time: 1754970316
+stop time: 1822816015
+elapsed time: 67845699
+
+Block index: 4
+SM id: 2
+start time: 1754970770
+stop time: 1822814788
+elapsed time: 67844018
+
+Block index: 5
+SM id: 1
+start time: 1801250970
+stop time: 1869096355
+elapsed time: 67845385
+
+Block index: 6
+SM id: 2
+start time: 1754984456
+stop time: 1822827524
+elapsed time: 67843068
+
+Block index: 7
+SM id: 8
+start time: 1754985467
+stop time: 1822827793
+elapsed time: 67842326
+
+Block index: 8
+SM id: 13
+start time: 1801256097
+stop time: 1869096360
+elapsed time: 67840263
+
+Block index: 9
+SM id: 11
+start time: 1754986412
+stop time: 1822827976
+elapsed time: 67841564
+
+Block index: 10
+SM id: 10
+start time: 1801256795
+stop time: 1869096935
+elapsed time: 67840140
+
+Block index: 11
+SM id: 5
+start time: 1754987512
+stop time: 1822829449
+elapsed time: 67841937
+
+Block index: 12
+SM id: 4
+start time: 1801259047
+stop time: 1869095784
+elapsed time: 67836737
+
+Block index: 13
+SM id: 7
+start time: 1801261832
+stop time: 1869097200
+elapsed time: 67835368
+
+Block index: 14
+SM id: 14
+start time: 1754993544
+stop time: 1822828559
+elapsed time: 67835015
+

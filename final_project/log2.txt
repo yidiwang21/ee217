@@ -1,0 +1,1489 @@
+Launching kernel...
+=========================================
+kernel id: 0
+Duration: 18.495998
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+=========================================
+kernel id: 1
+Duration: 4.928000
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+=========================================
+kernel id: 2
+Duration: 2.368000
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+=========================================
+kernel id: 3
+Duration: 4.928000
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+=========================================
+kernel id: 4
+Duration: 2.368000
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+=========================================
+kernel id: 5
+Duration: 2.400000
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+=========================================
+kernel id: 6
+Duration: 2.464000
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+=========================================
+kernel id: 7
+Duration: 2.400000
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+=========================================
+kernel id: 8
+Duration: 2.496000
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+=========================================
+kernel id: 9
+Duration: 2.464000
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+=========================================
+kernel id: 10
+Duration: 2.496000
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+=========================================
+kernel id: 11
+Duration: 2.400000
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+=========================================
+kernel id: 12
+Duration: 2.464000
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+=========================================
+kernel id: 13
+Duration: 2.464000
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+=========================================
+kernel id: 14
+Duration: 2.496000
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+=========================================
+kernel id: 15
+Duration: 2.400000
+Block index: 0
+SM id: 0
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 1
+SM id: 12
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 2
+SM id: 9
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 3
+SM id: 3
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 4
+SM id: 6
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 5
+SM id: 13
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 6
+SM id: 10
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 7
+SM id: 7
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 8
+SM id: 4
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 9
+SM id: 1
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 10
+SM id: 9
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 11
+SM id: 3
+start time: 1001081751
+stop time: 1001081775
+elapsed time: 23
+
+Block index: 12
+SM id: 5
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 13
+SM id: 11
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+
+Block index: 14
+SM id: 8
+start time: 1001081751
+stop time: 1001081784
+elapsed time: 32
+

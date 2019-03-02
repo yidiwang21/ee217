@@ -1,24 +1,64 @@
 {
     "name": "Kernel Scheduling",
-    "kernel_number": 2,
+    "kernel_number": 7,
     "iterations": 2,
     "sched_policy": 0,
     "kernel_entry": [
         {
             "kernel_name":  "k1",
             "kernel_id":    1,
-            "grid_size":    25,    
+            "grid_size":    15,    
             "block_size":   32,
-            "duration":     100,
-            "shared_mem":   0
+            "duration":     0,
+            "shared_mem":   1024
         },
         {
             "kernel_name":  "k1",
-            "kernel_id":    2,
-            "grid_size":    5,    
+            "kernel_id":    1,
+            "grid_size":    15,    
             "block_size":   32,
-            "duration":     100,
-            "shared_mem":   0
+            "duration":     0,
+            "shared_mem":   1024
+        },
+        {
+            "kernel_name":  "k1",
+            "kernel_id":    1,
+            "grid_size":    15,    
+            "block_size":   32,
+            "duration":     0,
+            "shared_mem":   1024
+        },
+        {
+            "kernel_name":  "k1",
+            "kernel_id":    1,
+            "grid_size":    15,    
+            "block_size":   32,
+            "duration":     0,
+            "shared_mem":   1024
+        },
+        {
+            "kernel_name":  "k1",
+            "kernel_id":    1,
+            "grid_size":    15,    
+            "block_size":   32,
+            "duration":     0,
+            "shared_mem":   1024
+        },
+        {
+            "kernel_name":  "k1",
+            "kernel_id":    1,
+            "grid_size":    15,    
+            "block_size":   32,
+            "duration":     0,
+            "shared_mem":   1024
+        },
+        {
+            "kernel_name":  "k1",
+            "kernel_id":    1,
+            "grid_size":    15,    
+            "block_size":   32,
+            "duration":     0,
+            "shared_mem":   1024
         }
     ]
 }

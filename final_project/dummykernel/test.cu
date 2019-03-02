@@ -2,9 +2,9 @@
 #include <stdlib.h>
 
 #define ITER_NUM    1024 * 8
-#define STREAM_NUM  4
+#define STREAM_NUM  6
 #define BLOCK_SIZE  32
-#define GRID_SIZE   2
+#define GRID_SIZE   16
 #define VEC_SIZE    1000
 
 

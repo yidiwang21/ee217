@@ -5,6 +5,7 @@
 #include "support.cu"
 
 #define ITER_NUM    10000   // just an amplifier
+#define ITER_NUM_LARGE  1000000
 
 // My kernels do something meaningless like reversing content in shared memory
 // just spin for a while and allocate some shared memory
@@ -87,7 +88,7 @@ __global__ void lazyKernel_1024(int delay) {
         for (unsigned int i = 0; i < bytes_per_thread; i++) 
             SharedMemArr[bytes_per_thread * threadIdx.x + i] = threadIdx.x;
     }
-    
+
     unsigned int start = kernelTimer();
     while (kernelTimer() - start < delay);
     unsigned int stop = kernelTimer();
@@ -136,4 +137,16 @@ __global__ void lazyKernel_16384(int delay) {
     unsigned int stop = kernelTimer();
 }
 
+__global__ void kernel_no_mem(int delay) {
+    int tid = threadIdx.x + blockDim.x * gridDim.x;
+    int x;
+    int n = 1000;
+    for (int j = 0; j < ITER_NUM; j++) {
+        int tmp = j % 64;
+        for (int i = threadIdx.x; i < n; i += 32) {
+            if (i + tmp >= n) tmp = 0;
+            x = 3 * x;
+        }
+    }
+}
 #endif

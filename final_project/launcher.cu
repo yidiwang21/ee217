@@ -50,22 +50,22 @@ void release(int idx, void* stream_id, int *in, int n) {
         case 1024:
             printf("    Shared mem size = 1024\n");
             // kernel_shared_mem_1024 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 1024, stream_id>>> (in, n, kernel_config_tmp.duration);
-            lazyKernel_1024 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 1024, stream_id>>> (kernel_config_tmp.duration);
+            lazyKernel_1024 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 0, stream_id>>> (kernel_config_tmp.duration);
             break;
         case 4096:
             printf("    Shared mem size = 4096\n");
             // kernel_shared_mem_4096 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 4096, stream_id>>> (in, n, kernel_config_tmp.duration);
-            lazyKernel_4096 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 4096, stream_id>>> (kernel_config_tmp.duration);
+            lazyKernel_4096 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 0, stream_id>>> (kernel_config_tmp.duration);
             break;
         case 8192:
             printf("    Shared mem size = 8192\n");
             // kernel_shared_mem_4096 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 4096, stream_id>>> (in, n, kernel_config_tmp.duration);
-            lazyKernel_8192 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 8192, stream_id>>> (kernel_config_tmp.duration);
+            lazyKernel_8192 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 0, stream_id>>> (kernel_config_tmp.duration);
             break;
         case 16384:
             printf("    Shared mem size = 16348\n");
             // kernel_shared_mem_16384 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 16384, stream_id>>> (in, n, kernel_config_tmp.duration);
-            lazyKernel_16384 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 16384, stream_id>>> (kernel_config_tmp.duration);
+            lazyKernel_16384 <<<kernel_config_tmp.grid_size, kernel_config_tmp.block_size, 0, stream_id>>> (kernel_config_tmp.duration);
             break;
         default:
             fprintf(stderr, "# Invalid shared memory size!\n");
@@ -217,7 +217,8 @@ int scheduler(char *config_file, int *in_d, int n) {
     cudaStream_t *streams;
     streams = (cudaStream_t*)malloc(KERNEL_NUM * sizeof(cudaStream_t));
     for (int i = 0; i < KERNEL_NUM; i++) {
-        cudaStreamCreateWithFlags(&streams[i], cudaStreamNonBlocking);
+        // cudaStreamCreateWithFlags(&streams[i], cudaStreamNonBlocking);
+        cudaStreamCreate(&streams[i]);
     }
     cudaDeviceSynchronize();
 
@@ -244,10 +245,12 @@ int scheduler(char *config_file, int *in_d, int n) {
     // smaller (shared_mem * grid_size) goes first
     benchmark_config.kernel_config = kernel_config;
 
+    Timer timer;
     for (int idx = 0; idx < KERNEL_NUM; idx++) {
         release(idx, streams[idx], in_d, n);   // release i th kernel in the sorted quue
         // cuda_ret = cudaDeviceSynchronize();
         // if(cuda_ret != cudaSuccess) fprintf(stderr, "Unable to launch kernel!\n");
+        printf("Fuck gpu!\n");
     }
     cudaDeviceSynchronize();
 
