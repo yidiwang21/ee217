@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define STREAM_NUM  35
+#define STREAM_NUM  33
 #define BLOCK_SIZE  32
-#define GRID_SIZE   15
+#define GRID_SIZE   19
 
 #define ITER_NUM    8 * 1024
 
@@ -76,6 +76,8 @@ int main() {
     uint32_t **block_smids, *block_smids_d;
     block_times = (uint64_t **)malloc(sizeof(uint64_t*) * STREAM_NUM);
     block_smids = (uint32_t **)malloc(sizeof(uint32_t*) * STREAM_NUM);
+
+    cudaError_t cuda_ret;
     
     for (int k = 0; k < STREAM_NUM; k++) {
         block_times[k] = (uint64_t *)malloc(sizeof(uint64_t) * GRID_SIZE * 2);
@@ -92,8 +94,6 @@ int main() {
     // }
     
     cudaDeviceSynchronize();
-
-    printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!!!!!\n");
 
     printf("Launching kernel...\n"); fflush(stdout);
     cudaStream_t streams[STREAM_NUM];
@@ -126,8 +126,8 @@ int main() {
     cudaDeviceSynchronize();
 
     for (int i = 0; i < STREAM_NUM; i++) {
-        cudaMemcpy(&block_times[i], &block_times_d[i * GRID_SIZE * 2], sizeof(uint64_t) * 2 * GRID_SIZE, cudaMemcpyDeviceToHost);
-        cudaMemcpy(&block_smids[i], &block_smids_d[i * GRID_SIZE], sizeof(uint32_t) * GRID_SIZE, cudaMemcpyDeviceToHost);
+        cudaMemcpy(block_times[i], &block_times_d[i * GRID_SIZE * 2], sizeof(uint64_t) * 2 * GRID_SIZE, cudaMemcpyDeviceToHost);
+        cudaMemcpy(block_smids[i], &block_smids_d[i * GRID_SIZE], sizeof(uint32_t) * GRID_SIZE, cudaMemcpyDeviceToHost);
         cudaDeviceSynchronize();
     }
 
