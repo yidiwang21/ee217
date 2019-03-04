@@ -1,0 +1,9 @@
+1. 
+Execution time without streams: 
+Execution time with streams: 
+
+2. 
+
+3. Yes. The first kernel is now running while the second one is doing MemCpy(HtoD). When the second kernel is running, the third one is doing MemCpy(HtoD).
+
+4. Yes. More memory copy operations will overlap.
