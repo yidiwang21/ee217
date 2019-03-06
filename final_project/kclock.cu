@@ -1,35 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "support.cu"
 
-#define STREAM_NUM  33
+#define STREAM_NUM  7
 #define BLOCK_SIZE  32
-#define GRID_SIZE   19
+#define GRID_SIZE   15
+
+#define DELAY_BETWEEN_LAUNCH    0 //0.005
 
 #define ITER_NUM    8 * 1024
 
-typedef unsigned long long  uint64_t; 
-typedef unsigned long   uint32_t;
+// typedef unsigned long long  uint64_t; 
+// typedef unsigned long   uint32_t;
 
 __device__ inline uint64_t GlobalTimer64(void) {
-    /* volatile uint64_t first_reading;
-    // volatile uint32_t second_reading;
-    volatile unsigned int second_reading;
-    uint32_t high_bits_first;
-    asm volatile("mov.u64 %0, %%globaltimer;" : "=l"(first_reading));
-    high_bits_first = first_reading >> 32;
-    asm volatile("mov.u32 %0, %%globaltimer_hi;" : "=r"(second_reading));
-    if (high_bits_first == second_reading) {
-      return first_reading;
-    }
-    // Return the value with the updated high bits, but the low bits set to 0.
-    return ((uint64_t) second_reading) << 32;
-     */
-    //  volatile uint64_t ret;
-    //  asm volatile("mov.u64  %0, %clock64;": "=l"(ret));
-    //  return ret;
-     volatile uint64_t reading;
-     asm volatile("mov.u64 %0, %%globaltimer;" : "=l"(reading));
-     return reading;
+    volatile uint64_t reading;
+    asm volatile("mov.u64 %0, %%globaltimer;" : "=l"(reading));
+    return reading;
 }
 
 static __device__ __inline__ unsigned int GetSMID(void) {
@@ -78,6 +65,7 @@ int main() {
     block_smids = (uint32_t **)malloc(sizeof(uint32_t*) * STREAM_NUM);
 
     cudaError_t cuda_ret;
+    Timer timer;
     
     for (int k = 0; k < STREAM_NUM; k++) {
         block_times[k] = (uint64_t *)malloc(sizeof(uint64_t) * GRID_SIZE * 2);
@@ -96,6 +84,7 @@ int main() {
     cudaDeviceSynchronize();
 
     printf("Launching kernel...\n"); fflush(stdout);
+    printf("Kernel number: %d\n", STREAM_NUM);
     cudaStream_t streams[STREAM_NUM];
     for (int i = 0; i < STREAM_NUM; i++) {
         cudaStreamCreateWithFlags(&streams[i], cudaStreamNonBlocking);
@@ -114,14 +103,11 @@ int main() {
 
     int j = 0;
     for (int i = 0; i < STREAM_NUM; i++) {
-        cudaEventRecord(events[j]);
-        // cudaEventRecord(start);
         SharedMem_GPUSpin1024 <<<GRID_SIZE, BLOCK_SIZE, 0, streams[i]>>>(0, &block_times_d[i * GRID_SIZE * 2], &block_smids_d[i * GRID_SIZE]);
-        cudaEventRecord(events[j+1]);
-        cudaEventSynchronize(events[j+1]);
-        // cudaEventRecord(stop);
-        // cudaEventSynchronize(stop);
-        j += 2;
+        startTime(&timer);
+        do {
+            stopTime(&timer);
+        }while(elapsedTime(timer) < DELAY_BETWEEN_LAUNCH);
     }
     cudaDeviceSynchronize();
 
@@ -131,6 +117,9 @@ int main() {
         cudaDeviceSynchronize();
     }
 
+    for (int i = 0; i < STREAM_NUM; i++)
+        cudaStreamDestroy(streams[i]);
+
     float ms = 0;
 
     for (int j = 0; j < STREAM_NUM; j++) {
@@ -139,12 +128,15 @@ int main() {
         cudaEventElapsedTime(&ms, events[j * 2], events[j*2+1]);
         // cudaEventElapsedTime(&ms, start, stop);
         // printf("Duration: %f\n", ms * 1000);
-        for (int i = 0; i < GRID_SIZE; i++) {
+        for (int i = 0; i < GRID_SIZE; i++) {   // print each block
+            block_times[j][i*2] = (block_times[j][i*2] / 1000 / 1000) % 10000;
+            block_times[j][i*2+1] = (block_times[j][i*2+1] / 1000 / 1000) % 10000;
+
             printf("Block index: %d\n", i);
             printf("SM id: %d\n", block_smids[j][i]);
-            printf("start time: %d\n", block_times[j][i*2] / 1000 / 1000);
-            printf("stop time: %d\n", block_times[j][i*2+1] / 1000 / 1000);
-            printf("elapsed time: %d\n\n", (block_times[j][2*i+1] - block_times[j][2*i]) / 1000 / 1000);
+            printf("start time: %d\n", block_times[j][i*2]);
+            printf("stop time: %d\n", block_times[j][i*2+1]);
+            printf("elapsed time: %d\n\n", block_times[j][2*i+1] - block_times[j][2*i]);
             // printf("start time: %d\n", block_times[i]);
             // printf("stop time: %d\n", block_times[i+1]);
             // printf("elapsed time: %d\n\n", (block_times[i+1] - block_times[i]));

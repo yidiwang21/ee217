@@ -1,813 +1,646 @@
 Launching kernel...
+Kernel number: 7
 =========================================
 kernel id: 0
 Block index: 0
 SM id: 0
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 1
 SM id: 1
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 2
 SM id: 2
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 3
 SM id: 3
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 4
 SM id: 4
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 5
 SM id: 5
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 6
 SM id: 6
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 7
 SM id: 7
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 8
 SM id: 8
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 9
 SM id: 9
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 10
 SM id: 10
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 11
 SM id: 11
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 12
 SM id: 12
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 13
 SM id: 13
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 14
 SM id: 14
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 15
-SM id: 15
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 16
-SM id: 16
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 17
-SM id: 17
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 18
-SM id: 18
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 =========================================
 kernel id: 1
 Block index: 0
 SM id: 0
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 1
 SM id: 1
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 2
 SM id: 2
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 3
 SM id: 3
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 4
 SM id: 4
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 5
 SM id: 5
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 6
 SM id: 6
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 7
 SM id: 7
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 8
 SM id: 8
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 9
 SM id: 9
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 10
 SM id: 10
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 11
 SM id: 11
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 12
 SM id: 12
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 13
 SM id: 13
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 14
 SM id: 14
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 15
-SM id: 15
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 16
-SM id: 16
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 17
-SM id: 17
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 18
-SM id: 18
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 =========================================
 kernel id: 2
 Block index: 0
 SM id: 0
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3928
+elapsed time: 35
 
 Block index: 1
 SM id: 1
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 2
 SM id: 2
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 3
 SM id: 3
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3928
+elapsed time: 35
 
 Block index: 4
 SM id: 4
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 5
 SM id: 5
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 6
 SM id: 6
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3928
+elapsed time: 35
 
 Block index: 7
 SM id: 7
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 8
 SM id: 8
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 9
 SM id: 9
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3928
+elapsed time: 35
 
 Block index: 10
 SM id: 10
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 11
 SM id: 11
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 12
 SM id: 12
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3928
+elapsed time: 35
 
 Block index: 13
 SM id: 13
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 14
 SM id: 14
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
-
-Block index: 15
-SM id: 15
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
-
-Block index: 16
-SM id: 16
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
-
-Block index: 17
-SM id: 17
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
-
-Block index: 18
-SM id: 18
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 =========================================
 kernel id: 3
 Block index: 0
 SM id: 0
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
+start time: 3893
+stop time: 3917
+elapsed time: 24
 
 Block index: 1
 SM id: 1
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
+start time: 3893
+stop time: 3917
+elapsed time: 24
 
 Block index: 2
 SM id: 2
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
+start time: 3893
+stop time: 3917
+elapsed time: 24
 
 Block index: 3
 SM id: 3
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
+start time: 3893
+stop time: 3917
+elapsed time: 24
 
 Block index: 4
 SM id: 4
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
+start time: 3893
+stop time: 3917
+elapsed time: 24
 
 Block index: 5
 SM id: 5
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
+start time: 3893
+stop time: 3917
+elapsed time: 24
 
 Block index: 6
 SM id: 6
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
+start time: 3893
+stop time: 3917
+elapsed time: 24
 
 Block index: 7
 SM id: 7
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
+start time: 3893
+stop time: 3917
+elapsed time: 24
 
 Block index: 8
 SM id: 8
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
+start time: 3893
+stop time: 3917
+elapsed time: 24
 
 Block index: 9
 SM id: 9
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
+start time: 3893
+stop time: 3917
+elapsed time: 24
 
 Block index: 10
 SM id: 10
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
+start time: 3893
+stop time: 3917
+elapsed time: 24
 
 Block index: 11
 SM id: 11
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
+start time: 3893
+stop time: 3917
+elapsed time: 24
 
 Block index: 12
 SM id: 12
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
+start time: 3893
+stop time: 3917
+elapsed time: 24
 
 Block index: 13
 SM id: 13
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
+start time: 3893
+stop time: 3917
+elapsed time: 24
 
 Block index: 14
 SM id: 14
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
-
-Block index: 15
-SM id: 15
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
-
-Block index: 16
-SM id: 16
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
-
-Block index: 17
-SM id: 17
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
-
-Block index: 18
-SM id: 18
-start time: 1018957656
-stop time: 1018957678
-elapsed time: 21
+start time: 3893
+stop time: 3917
+elapsed time: 24
 
 =========================================
 kernel id: 4
 Block index: 0
 SM id: 0
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 1
 SM id: 1
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 2
 SM id: 2
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 3
 SM id: 3
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 4
 SM id: 4
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 5
 SM id: 5
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 6
 SM id: 6
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 7
 SM id: 7
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 8
 SM id: 8
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 9
 SM id: 9
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 10
 SM id: 10
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 11
 SM id: 11
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 12
 SM id: 12
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 13
 SM id: 13
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 14
 SM id: 14
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 15
-SM id: 15
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 16
-SM id: 16
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 17
-SM id: 17
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 18
-SM id: 18
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 =========================================
 kernel id: 5
 Block index: 0
 SM id: 0
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 1
 SM id: 1
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 2
 SM id: 2
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 3
 SM id: 3
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 4
 SM id: 4
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 5
 SM id: 5
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 6
 SM id: 6
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 7
 SM id: 7
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 8
 SM id: 8
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 9
 SM id: 9
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 10
 SM id: 10
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 11
 SM id: 11
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 12
 SM id: 12
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 13
 SM id: 13
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 Block index: 14
 SM id: 14
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 15
-SM id: 15
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 16
-SM id: 16
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 17
-SM id: 17
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
-
-Block index: 18
-SM id: 18
-start time: 1018957656
-stop time: 1018957698
-elapsed time: 41
+start time: 3893
+stop time: 3939
+elapsed time: 46
 
 =========================================
 kernel id: 6
 Block index: 0
 SM id: 0
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3928
+elapsed time: 35
 
 Block index: 1
 SM id: 1
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 2
 SM id: 2
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 3
 SM id: 3
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3928
+elapsed time: 35
 
 Block index: 4
 SM id: 4
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 5
 SM id: 5
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 6
 SM id: 6
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3928
+elapsed time: 35
 
 Block index: 7
 SM id: 7
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 8
 SM id: 8
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 9
 SM id: 9
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3928
+elapsed time: 35
 
 Block index: 10
 SM id: 10
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 11
 SM id: 11
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 12
 SM id: 12
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3928
+elapsed time: 35
 
 Block index: 13
 SM id: 13
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
 Block index: 14
 SM id: 14
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
-
-Block index: 15
-SM id: 15
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
-
-Block index: 16
-SM id: 16
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
-
-Block index: 17
-SM id: 17
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
-
-Block index: 18
-SM id: 18
-start time: 1018957656
-stop time: 1018957687
-elapsed time: 31
+start time: 3893
+stop time: 3927
+elapsed time: 34
 
