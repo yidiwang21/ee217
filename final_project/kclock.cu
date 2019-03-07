@@ -1,64 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "support.cu"
+#include "kernel.cu"
 
-#define STREAM_NUM  7
-#define BLOCK_SIZE  32
-#define GRID_SIZE   15
+#define STREAM_NUM  3
+
+#define MAX(a,b) (((a)>(b))?(a):(b))
+
+// #define GRID_SIZE   15
 
 #define DELAY_BETWEEN_LAUNCH    0 //0.005
-
-#define ITER_NUM    8 * 1024
+#define SPIN_TIME   20000000         // 20ms
 
 // typedef unsigned long long  uint64_t; 
 // typedef unsigned long   uint32_t;
 
-__device__ inline uint64_t GlobalTimer64(void) {
-    volatile uint64_t reading;
-    asm volatile("mov.u64 %0, %%globaltimer;" : "=l"(reading));
-    return reading;
-}
-
-static __device__ __inline__ unsigned int GetSMID(void) {
-    unsigned int ret;
-    asm volatile("mov.u32 %0, %%smid;" : "=r"(ret));
-    return ret;
-}
-
-static __device__ uint32_t UseSharedMemory1024(void) {
-    __shared__ uint32_t shared_mem_arr[1024];
-    uint32_t num_threads, elts_per_thread, i;
-    num_threads = blockDim.x;
-    elts_per_thread = 1024 / num_threads;
-    for (int j = 0; j < ITER_NUM; j++) {
-        for (i = 0; i < elts_per_thread; i++) {
-            shared_mem_arr[threadIdx.x * elts_per_thread + i] = threadIdx.x;
-        }
-    }
-    return shared_mem_arr[threadIdx.x * elts_per_thread];
-}
-
-static __global__ void SharedMem_GPUSpin1024(uint64_t spin_duration, uint64_t *block_times, uint32_t *block_smids) {
-    uint32_t shared_mem_res;
-    uint64_t start_time = GlobalTimer64();
-    if (threadIdx.x == 0) {
-        block_times[blockIdx.x * 2] = start_time;
-        block_smids[blockIdx.x] = GetSMID();
-    }
-    __syncthreads();
-    shared_mem_res = UseSharedMemory1024();
-    // while ((GlobalTimer64() - start_time) < spin_duration) {
-    //     continue;
-    // }
-    // Record the kernel and block end times.
-    if (shared_mem_res == 0) {
-        block_times[blockIdx.x * 2 + 1] = GlobalTimer64();
-    }
-}
-
-
+typedef struct {
+    int gird_size;
+    int block_size;
+}Kernel_Info;
 
 int main() {
+    Kernel_Info *kernel_list = (Kernel_Info *)malloc(sizeof(Kernel_Info) * STREAM_NUM);
+    kernel_list[0].gird_size = 15 * 3;
+    kernel_list[0].block_size = 512;
+    kernel_list[1].gird_size = 15 * 5;
+    kernel_list[1].block_size = 256;
+    kernel_list[2].gird_size = 15;
+    kernel_list[2].block_size = 1024;
+
+    int GRID_SIZE = MAX(MAX(kernel_list[0].gird_size, kernel_list[1].gird_size), kernel_list[2].gird_size);
+
     uint64_t **block_times, *block_times_d;
     uint32_t **block_smids, *block_smids_d;
     block_times = (uint64_t **)malloc(sizeof(uint64_t*) * STREAM_NUM);
@@ -71,16 +43,23 @@ int main() {
         block_times[k] = (uint64_t *)malloc(sizeof(uint64_t) * GRID_SIZE * 2);
         block_smids[k] = (uint32_t *)malloc(sizeof(uint32_t) * GRID_SIZE);
     }
+    
+    for (int i = 0; i < STREAM_NUM; i++) {
+        for (int j = 0; j < GRID_SIZE; j++) {
+            block_times[i][2*j] = 0;
+            block_times[i][2*j+1] = 0;
+            block_smids[i][j] = 0;
+        }
+    }
 
-    // FIXME: cudamalloc these in vector form
     cudaMalloc((void**) &block_times_d, sizeof(uint64_t) * GRID_SIZE * 2 * STREAM_NUM);
     cudaMalloc((void**) &block_smids_d, sizeof(uint32_t) * GRID_SIZE * STREAM_NUM);
+    cudaDeviceSynchronize();
 
-    // for (int k = 0; k < STREAM_NUM; k++) {
-    //     cudaMalloc((void**) &block_times_d[k], sizeof(uint64_t) * GRID_SIZE * 2);
-    //     cudaMalloc((void**) &block_smids_d[k], sizeof(uint32_t) * GRID_SIZE);
-    // }
-    
+    for (int i = 0; i < STREAM_NUM; i++) {
+        cudaMemcpy(&block_times_d[i], block_times[i * GRID_SIZE * 2], sizeof(uint64_t) * 2 * GRID_SIZE, cudaMemcpyHostToDevice);
+        cudaMemcpy(&block_smids_d[i], block_smids[i * GRID_SIZE], sizeof(uint32_t) * GRID_SIZE, cudaMemcpyHostToDevice);
+    }
     cudaDeviceSynchronize();
 
     printf("Launching kernel...\n"); fflush(stdout);
@@ -91,31 +70,24 @@ int main() {
     }
     cudaDeviceSynchronize();
 
-    cudaEvent_t *events;
-    events = (cudaEvent_t *)malloc(sizeof(cudaEvent_t) * STREAM_NUM * 2);
-    for (int i = 0; i < STREAM_NUM * 2; i++) {
-        cudaEventCreate(&events[i]);
-    }
+    // for (int i = 0; i < STREAM_NUM; i++) {
+    //     GPUSpin <<<GRID_SIZE, BLOCK_SIZE, 0, streams[i]>>>(SPIN_TIME, &block_times_d[i * GRID_SIZE * 2], &block_smids_d[i * GRID_SIZE]);
+    //     // startTime(&timer);
+    //     // do {
+    //     //     stopTime(&timer);
+    //     // }while(elapsedTime(timer) < DELAY_BETWEEN_LAUNCH);
+    // }
 
-    cudaEvent_t start, stop;
-    cudaEventCreate(&start);
-    cudaEventCreate(&stop);
-
-    int j = 0;
     for (int i = 0; i < STREAM_NUM; i++) {
-        SharedMem_GPUSpin1024 <<<GRID_SIZE, BLOCK_SIZE, 0, streams[i]>>>(0, &block_times_d[i * GRID_SIZE * 2], &block_smids_d[i * GRID_SIZE]);
-        startTime(&timer);
-        do {
-            stopTime(&timer);
-        }while(elapsedTime(timer) < DELAY_BETWEEN_LAUNCH);
+        GPUSpin <<<kernel_list[i].gird_size, kernel_list[i].block_size, 0, streams[i]>>>(SPIN_TIME, &block_times_d[i * GRID_SIZE * 2], &block_smids_d[i * GRID_SIZE]);
     }
     cudaDeviceSynchronize();
 
     for (int i = 0; i < STREAM_NUM; i++) {
         cudaMemcpy(block_times[i], &block_times_d[i * GRID_SIZE * 2], sizeof(uint64_t) * 2 * GRID_SIZE, cudaMemcpyDeviceToHost);
         cudaMemcpy(block_smids[i], &block_smids_d[i * GRID_SIZE], sizeof(uint32_t) * GRID_SIZE, cudaMemcpyDeviceToHost);
-        cudaDeviceSynchronize();
     }
+    cudaDeviceSynchronize();
 
     for (int i = 0; i < STREAM_NUM; i++)
         cudaStreamDestroy(streams[i]);
@@ -124,19 +96,21 @@ int main() {
 
     for (int j = 0; j < STREAM_NUM; j++) {
         printf("=========================================\n");
-        printf("kernel id: %d\n", j);
-        cudaEventElapsedTime(&ms, events[j * 2], events[j*2+1]);
+        // printf("kernel id: %d\n", j);
+        // cudaEventElapsedTime(&ms, events[j * 2], events[j*2+1]);
         // cudaEventElapsedTime(&ms, start, stop);
         // printf("Duration: %f\n", ms * 1000);
         for (int i = 0; i < GRID_SIZE; i++) {   // print each block
             block_times[j][i*2] = (block_times[j][i*2] / 1000 / 1000) % 10000;
             block_times[j][i*2+1] = (block_times[j][i*2+1] / 1000 / 1000) % 10000;
-
-            printf("Block index: %d\n", i);
-            printf("SM id: %d\n", block_smids[j][i]);
-            printf("start time: %d\n", block_times[j][i*2]);
-            printf("stop time: %d\n", block_times[j][i*2+1]);
-            printf("elapsed time: %d\n\n", block_times[j][2*i+1] - block_times[j][2*i]);
+            if (block_times[j][i*2] != 0 && block_times[j][i*2+1] != 0) {
+                printf("Block index: %d\n", i);
+                printf("kernel id: %d\n", j);
+                printf("SM id: %d\n", block_smids[j][i]);
+                printf("start time: %d\n", block_times[j][i*2]);
+                printf("stop time: %d\n", block_times[j][i*2+1]);
+                printf("elapsed time: %d\n\n", block_times[j][2*i+1] - block_times[j][2*i]);
+            }
             // printf("start time: %d\n", block_times[i]);
             // printf("stop time: %d\n", block_times[i+1]);
             // printf("elapsed time: %d\n\n", (block_times[i+1] - block_times[i]));

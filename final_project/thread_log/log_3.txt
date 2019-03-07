@@ -1,0 +1,318 @@
+Launching kernel...
+Kernel number: 1
+=========================================
+Block index: 0
+kernel id: 0
+SM id: 0
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 1
+kernel id: 0
+SM id: 1
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 2
+kernel id: 0
+SM id: 2
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 3
+kernel id: 0
+SM id: 3
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 4
+kernel id: 0
+SM id: 4
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 5
+kernel id: 0
+SM id: 5
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 6
+kernel id: 0
+SM id: 6
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 7
+kernel id: 0
+SM id: 7
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 8
+kernel id: 0
+SM id: 8
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 9
+kernel id: 0
+SM id: 9
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 10
+kernel id: 0
+SM id: 10
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 11
+kernel id: 0
+SM id: 11
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 12
+kernel id: 0
+SM id: 12
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 13
+kernel id: 0
+SM id: 13
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 14
+kernel id: 0
+SM id: 14
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 15
+kernel id: 0
+SM id: 0
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 16
+kernel id: 0
+SM id: 1
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 17
+kernel id: 0
+SM id: 2
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 18
+kernel id: 0
+SM id: 3
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 19
+kernel id: 0
+SM id: 4
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 20
+kernel id: 0
+SM id: 5
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 21
+kernel id: 0
+SM id: 6
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 22
+kernel id: 0
+SM id: 7
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 23
+kernel id: 0
+SM id: 8
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 24
+kernel id: 0
+SM id: 9
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 25
+kernel id: 0
+SM id: 10
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 26
+kernel id: 0
+SM id: 11
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 27
+kernel id: 0
+SM id: 12
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 28
+kernel id: 0
+SM id: 13
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 29
+kernel id: 0
+SM id: 14
+start time: 962
+stop time: 982
+elapsed time: 20
+
+Block index: 30
+kernel id: 0
+SM id: 9
+start time: 982
+stop time: 1002
+elapsed time: 20
+
+Block index: 31
+kernel id: 0
+SM id: 3
+start time: 982
+stop time: 1002
+elapsed time: 20
+
+Block index: 32
+kernel id: 0
+SM id: 0
+start time: 982
+stop time: 1002
+elapsed time: 20
+
+Block index: 33
+kernel id: 0
+SM id: 6
+start time: 982
+stop time: 1002
+elapsed time: 20
+
+Block index: 34
+kernel id: 0
+SM id: 12
+start time: 982
+stop time: 1002
+elapsed time: 20
+
+Block index: 35
+kernel id: 0
+SM id: 13
+start time: 982
+stop time: 1002
+elapsed time: 20
+
+Block index: 36
+kernel id: 0
+SM id: 7
+start time: 982
+stop time: 1002
+elapsed time: 20
+
+Block index: 37
+kernel id: 0
+SM id: 11
+start time: 982
+stop time: 1002
+elapsed time: 20
+
+Block index: 38
+kernel id: 0
+SM id: 14
+start time: 982
+stop time: 1002
+elapsed time: 20
+
+Block index: 39
+kernel id: 0
+SM id: 10
+start time: 982
+stop time: 1002
+elapsed time: 20
+
+Block index: 40
+kernel id: 0
+SM id: 2
+start time: 982
+stop time: 1002
+elapsed time: 20
+
+Block index: 41
+kernel id: 0
+SM id: 4
+start time: 982
+stop time: 1002
+elapsed time: 20
+
+Block index: 42
+kernel id: 0
+SM id: 3
+start time: 982
+stop time: 1002
+elapsed time: 20
+
+Block index: 43
+kernel id: 0
+SM id: 1
+start time: 982
+stop time: 1002
+elapsed time: 20
+
+Block index: 44
+kernel id: 0
+SM id: 0
+start time: 982
+stop time: 1002
+elapsed time: 20
+

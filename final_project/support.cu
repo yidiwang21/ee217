@@ -27,13 +27,21 @@ float elapsedTime(Timer timer) {
                 + (timer.endTime.tv_usec - timer.startTime.tv_usec)/1.0e6));
 }
 
-// FIXME: 
 __device__ inline unsigned int kernelTimer(void) {
-    // unsigned int clock;
-    // asm("mov.u32 %0, %clock;" : "=r"(clock) );
-    // return clock;
     clock_t k_time = clock();
     return k_time;
+}
+
+__device__ inline uint64_t GlobalTimer64(void) {
+    volatile uint64_t reading;
+    asm volatile("mov.u64 %0, %%globaltimer;" : "=l"(reading));
+    return reading;
+}
+
+static __device__ __inline__ unsigned int GetSMID(void) {
+    unsigned int ret;
+    asm volatile("mov.u32 %0, %%smid;" : "=r"(ret));
+    return ret;
 }
 
 #endif

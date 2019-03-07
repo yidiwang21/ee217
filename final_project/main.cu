@@ -17,21 +17,6 @@ int main (int argc, char *argv[]) {
     fclose(f);
     fc[fsize] = 0;
 
-    // init kernel input
-    // int *in;
-    // int n = 1000 * 1000;
-    // in = (int*)malloc(n * sizeof(int));
-    // int *output;
-    // output = (int*)malloc(n * sizeof(int));
-
-    // for (int i = 0; i < n; i++) {
-    //     in[i] = i % 255;
-    // }
-    // int *in_d;
-    // cudaMalloc((void**) &in_d, n * sizeof(int));
-    // cudaMemcpy(in_d, in, n * sizeof(int), cudaMemcpyHostToDevice);
-    // cudaDeviceSynchronize();
-
     scheduler(fc, NULL, 0);
 
     // cudaMemcpy(output, in_d, n * sizeof(int), cudaMemcpyDeviceToHost);

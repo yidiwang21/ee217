@@ -1,0 +1,108 @@
+Launching kernel...
+Kernel number: 1
+=========================================
+Block index: 0
+kernel id: 0
+SM id: 0
+start time: 113
+stop time: 133
+elapsed time: 20
+
+Block index: 1
+kernel id: 0
+SM id: 1
+start time: 113
+stop time: 133
+elapsed time: 20
+
+Block index: 2
+kernel id: 0
+SM id: 2
+start time: 113
+stop time: 133
+elapsed time: 20
+
+Block index: 3
+kernel id: 0
+SM id: 3
+start time: 113
+stop time: 133
+elapsed time: 20
+
+Block index: 4
+kernel id: 0
+SM id: 4
+start time: 113
+stop time: 133
+elapsed time: 20
+
+Block index: 5
+kernel id: 0
+SM id: 5
+start time: 113
+stop time: 133
+elapsed time: 20
+
+Block index: 6
+kernel id: 0
+SM id: 6
+start time: 113
+stop time: 133
+elapsed time: 20
+
+Block index: 7
+kernel id: 0
+SM id: 7
+start time: 113
+stop time: 133
+elapsed time: 20
+
+Block index: 8
+kernel id: 0
+SM id: 8
+start time: 113
+stop time: 133
+elapsed time: 20
+
+Block index: 9
+kernel id: 0
+SM id: 9
+start time: 113
+stop time: 133
+elapsed time: 20
+
+Block index: 10
+kernel id: 0
+SM id: 10
+start time: 113
+stop time: 133
+elapsed time: 20
+
+Block index: 11
+kernel id: 0
+SM id: 11
+start time: 113
+stop time: 133
+elapsed time: 20
+
+Block index: 12
+kernel id: 0
+SM id: 12
+start time: 113
+stop time: 133
+elapsed time: 20
+
+Block index: 13
+kernel id: 0
+SM id: 13
+start time: 113
+stop time: 133
+elapsed time: 20
+
+Block index: 14
+kernel id: 0
+SM id: 14
+start time: 113
+stop time: 133
+elapsed time: 20
+
