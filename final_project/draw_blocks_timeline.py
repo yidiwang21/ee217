@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
+import sys
 
-filename = "thread_log/opt.txt"
+filename = sys.argv[1]
 
 sm_num = 15
 lines_per_kernel = 6 * sm_num + 1
