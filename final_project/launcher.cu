@@ -1,38 +1,6 @@
 #ifndef __LAUNCHER_CU__
 #define __LAUNCHER_CU__
 
-#include <stdio.h>
-#include "third_party/cJSON.h"
-#include <algorithm>    // std::swap
-#include "kernel.cu"
-
-// keep the information for each kernel
-typedef struct {
-    char *kernel_name;
-    int kernel_id;
-    int block_size;     // # of threads per block
-    int grid_size;      // # of blcoks
-    int shared_mem;
-    int duration;
-}KernelInfo;
-
-// keep the information for the benchmark
-typedef struct {
-    int kernel_num;
-    int iteration;
-    int sched_policy;
-    KernelInfo *kernel_config;
-}BenchmarkInfo;
-
-typedef struct {
-    int available_thread_num;
-    int available_shared_mem_size;  // byte
-    int available_register_num;
-}ResourceInfo;
-
-
-BenchmarkInfo benchmark_config;
-
 
 // input value: kernel_id
 void release(int idx, void* stream_id, int *in, int n) {
