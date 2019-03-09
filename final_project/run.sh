@@ -15,4 +15,6 @@ while [ -n "$1" ]; do
     shift
 done
 
-./exe ${filename}
+./exe ${filename} > log.txt
+
+python3 draw_blocks_timeline.py log.txt
