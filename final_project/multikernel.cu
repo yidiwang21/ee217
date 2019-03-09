@@ -14,7 +14,7 @@ void MultiKernel::kernelInfoInit() {
     cJSON *iter = NULL;
     // cudaGetDeviceProperties(&devProp, 0);
 
-    printf("# Parsing kernel config file...\n");
+    // printf("# Parsing kernel config file...\n");
     // printf("[\n");
 
     entry = cJSON_GetObjectItem(parser, "kernel_number");
@@ -48,13 +48,13 @@ void MultiKernel::kernelInfoInit() {
         cJSON *duration_entry = cJSON_GetObjectItem(iter, "duration");
 
         kernel_list[idx].grid_size = grid_size_entry->valueint;
-        printf("        grid size = %d\n", kernel_list[idx].grid_size);
         kernel_list[idx].block_size = block_size_entry->valueint;   // must be in a range
-        printf("        block size = %d\n", kernel_list[idx].block_size);
         kernel_list[idx].duration = duration_entry->valueint;
-        printf("        duration = %d\n", kernel_list[idx].duration);
         kernel_list[idx].shared_mem = shared_mem_entry->valueint;
-        printf("        shared mem size = %d\n", kernel_list[idx].shared_mem);
+        // printf("        grid size = %d\n", kernel_list[idx].grid_size);
+        // printf("        block size = %d\n", kernel_list[idx].block_size);
+        // printf("        duration = %d\n", kernel_list[idx].duration);
+        // printf("        shared mem size = %d\n", kernel_list[idx].shared_mem);
         
         idx++;
     }
@@ -94,6 +94,8 @@ void MultiKernel::kernelLauncher() {
     for (int i = 0; i < kernel_num; i++) cudaStreamCreateWithFlags(&streams[i], cudaStreamNonBlocking);
     cudaDeviceSynchronize();
 
+    printf("Launching kernel...\n"); fflush(stdout);
+    printf("Kernel number: %d\n", kernel_num);
     for (int i = 0; i < kernel_num; i++) {
         GPUSpin <<<kernel_list[i].grid_size, kernel_list[i].block_size, 0, streams[i]>>> (kernel_list[i].duration, kernel_list[i].block_times_d, kernel_list[i].block_smids_d);
     }
