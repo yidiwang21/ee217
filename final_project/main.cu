@@ -1,13 +1,22 @@
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
+#include "unistd.h"
+#include "support.h"
+#include "multikernel.cu"
 #include "kernel.cu"
-#include "support.cu"
-#include "launcher.cu"
 
 int main (int argc, char *argv[]) {
-    // read kernel config file
-    FILE *f = fopen("config/config_1.json", "rb");
+
+    std::string filename = "config.json";
+
+    if (argc == 2) filename = argv[1];
+    else if (argc > 2) { fprintf(stderr, "# Usage: ./exe [file]\n"); exit(0); }
+
+    char *fn = (char *)malloc(sizeof(char) * (filename.length() + 1));
+    strcpy(fn, filename.c_str());
+
+    FILE *f = fopen(fn, "rb");
     fseek(f, 0, SEEK_END);
     long fsize = ftell(f);
     fseek(f, 0, SEEK_SET);
@@ -17,9 +26,8 @@ int main (int argc, char *argv[]) {
     fclose(f);
     fc[fsize] = 0;
 
-    scheduler(fc, NULL, 0);
-
-    // cudaMemcpy(output, in_d, n * sizeof(int), cudaMemcpyDeviceToHost);
-    cudaDeviceSynchronize();
-    printf("# Done!\n");
+    MultiKernel multi_kernel(fc);
+    multi_kernel.kernelLauncher();
+    
+    return 0;
 }

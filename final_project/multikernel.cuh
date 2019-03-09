@@ -1,5 +1,5 @@
-#ifndef __LAUNCHER_H__
-#define __LAUNCHER_H__
+#ifndef _MULTIKERNEL_H_
+#define _MULTIKERNEL_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,8 +19,8 @@ typedef struct {
     int grid_size;      // # of blocks
     int shared_mem;     // = 0 for now
     int duration;
-    uint64_t *block_times;
-    uint32_t *block_smids;
+    uint64_t *block_times, *block_times_d;
+    uint32_t *block_smids, *block_smids_d;
 }KernelInfo;
 
 // available resource on each SM
@@ -30,23 +30,28 @@ typedef struct {
     int available_register_num;     // not needed for now
 }ResourceInfo;
 
-class Launcher
+class MultiKernel
 {   
 public:
-    Launcher(char *config_file);
-    ~Launcher();
+    MultiKernel(char *fn);
+    // ~MultiKernel();
 
     int kernel_num;
     int sched_policy;
-    cudaDeviceProp devProp;
+    // char *config_file;
+    
+    // cudaDeviceProp devProp;
+
+    void kernelLauncher();
 private:
     KernelInfo *kernel_list;
     ResourceInfo *sm_list;
     cJSON *parser;
 
     void kernelInfoInit();
+    void scheduler();
+    void GPUResourceInit();
     void cleanUp();
-
 };
 
 #endif
