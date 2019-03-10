@@ -19,6 +19,7 @@ typedef struct {
     int grid_size;      // # of blocks
     int shared_mem;     // = 0 for now
     int duration;
+    bool valid;         // for bin packing
     uint64_t *block_times, *block_times_d;
     uint32_t *block_smids, *block_smids_d;
 }KernelInfo;
@@ -40,7 +41,7 @@ public:
     int sched_policy;
     // char *config_file;
     
-    // cudaDeviceProp devProp;
+    cudaDeviceProp devProp;
 
     void kernelLauncher();
 private:
@@ -52,6 +53,8 @@ private:
     void scheduler();
     void GPUResourceInit();
     void cleanUp();
+
+    void sortDurationDecending();
 };
 
 #endif

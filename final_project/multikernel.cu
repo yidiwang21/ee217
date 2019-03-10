@@ -12,7 +12,7 @@ MultiKernel::MultiKernel(char *config_file) {
 void MultiKernel::kernelInfoInit() {
     cJSON *entry = NULL;
     cJSON *iter = NULL;
-    // cudaGetDeviceProperties(&devProp, 0);
+    cudaGetDeviceProperties(&devProp, 0);
 
     // printf("# Parsing kernel config file...\n");
     // printf("[\n");
@@ -60,8 +60,31 @@ void MultiKernel::kernelInfoInit() {
     }
 }
 
-// TODO: 
-void MultiKernel::scheduler() {}
+void MultiKernel::sortDurationDecending() {
+    bool swapped;
+    do {
+        swapped = false;
+        for (int i = 0; i < kernel_num - 1; i++) {
+            if (kernel_list[i].duration > kernel_list[i+1].duration) {
+                std::swap(kernel_list[i], kernel_list[i+1]);
+                swapped = true; 
+            }
+        }
+    } while(swapped);   
+}
+
+void MultiKernel::scheduler() {
+    sortDurationDecending();
+
+    // 
+    int yr = 0; // store the value of current thread usage
+
+
+
+
+
+
+}
 
 // this should take sorted kernels as input
 void MultiKernel::GPUResourceInit() {
