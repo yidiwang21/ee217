@@ -9,6 +9,56 @@ MultiKernel::MultiKernel(char *config_file) {
     }
 }
 
+Node* MultiKernel::newNode() {
+    Node *new_node = (Node*)malloc(sizeof(Node));
+    new_node->kernel_id = 0;
+
+    return new_node;
+}
+
+Node* MultiKernel::splitNode(Node **node, int w, int h, int kid) {
+    (*node)->used = 1;
+    (*node)->kernel_id = kid;
+
+    (*node)->left = newNode();
+    (*node)->left->used = 1;
+    (*node)->left->kernel_id = (*node)->kernel_id;
+    (*node)->left->parent = (*node);
+    (*node)->left->left = NULL;
+    (*node)->left->right = NULL;
+    (*node)->left->start_point.x = (*node)->start_point.x;
+    (*node)->left->start_point.y = (*node)->start_point.y + h;
+    // (*node)->left->end_point->x = (*node)->end_point->x;
+    // (*node)->left->end_point->y = (*node)->end_point->;
+    (*node)->left->width = (*node)->width;
+    (*node)->left->height = (*node)->height - h;
+
+    (*node)->right = newNode();
+    (*node)->left->used = 0;
+    (*node)->right->kernel_id = 0;
+    (*node)->parent = (*node);
+    (*node)->right->left = NULL;
+    (*node)->right->right = NULL;
+    (*node)->right->start_point.x = (*node)->start_point.x + w;
+    (*node)->right->start_point.y = (*node)->start_point.y;
+    (*node)->right->width = (*node)->width - w;
+    (*node)->right->height = (*node)->height;
+
+    return (*node);
+}
+
+Node* MultiKernel::findBestFit(Node *root, int w, int h) {
+    if (root->used == 1) {
+        Node *rightchild = findBestFit(root->right, w, h);
+        if (rightchild != NULL) return rightchild;
+        Node *leftchild = findBestFit(root->left, w, h);
+        return leftchild;
+    }else if ((w <= root->width) && (h <= root->height))
+        return root;
+    else
+        return NULL;
+}
+
 void MultiKernel::kernelInfoInit() {
     cJSON *entry = NULL;
     cJSON *iter = NULL;
@@ -46,11 +96,13 @@ void MultiKernel::kernelInfoInit() {
         cJSON *block_size_entry = cJSON_GetObjectItem(iter, "block_size");
         cJSON *shared_mem_entry = cJSON_GetObjectItem(iter, "shared_mem");
         cJSON *duration_entry = cJSON_GetObjectItem(iter, "duration");
+        cJSON *kernel_id_entry = cJSON_GetObjectItem(iter, "kernel_id");
 
         kernel_list[idx].grid_size = grid_size_entry->valueint;
         kernel_list[idx].block_size = block_size_entry->valueint;   // must be in a range
         kernel_list[idx].duration = duration_entry->valueint;
         kernel_list[idx].shared_mem = shared_mem_entry->valueint;
+        kernel_list[idx].kernel_id = kernel_id_entry->valueint;
         // printf("        grid size = %d\n", kernel_list[idx].grid_size);
         // printf("        block size = %d\n", kernel_list[idx].block_size);
         // printf("        duration = %d\n", kernel_list[idx].duration);
@@ -60,12 +112,33 @@ void MultiKernel::kernelInfoInit() {
     }
 }
 
+void MultiKernel::blockInfoInit() {
+    count = 0;  // number of blocks averagely per SM
+    for (int i = 0; i < kernel_num; i++) {
+        for (int j = 0; j < kernel_list[i].grid_size/SM_NUM+1; j++) {
+            count++;
+        }
+    }
+
+    block_list = (BlockInfo*)malloc(sizeof(BlockInfo) * count);
+
+    int idx = 0;
+    for (int i = 0; i < kernel_num; i++) {
+        for (int j = 0; j < (kernel_list[i].grid_size-1)/SM_NUM+1; j++) {
+            block_list[idx+j].kernel_id = kernel_list[i].kernel_id;
+            block_list[idx+j].block_size = kernel_list[i].block_size;
+            block_list[idx+j].duration = kernel_list[i].duration;
+        }
+        idx += (kernel_list[i].grid_size-1)/SM_NUM+1;
+    }
+}
+
 void MultiKernel::sortDurationDecending() {
     bool swapped;
     do {
         swapped = false;
         for (int i = 0; i < kernel_num - 1; i++) {
-            if (kernel_list[i].duration > kernel_list[i+1].duration) {
+            if (kernel_list[i].duration < kernel_list[i+1].duration) {
                 std::swap(kernel_list[i], kernel_list[i+1]);
                 swapped = true; 
             }
@@ -73,17 +146,62 @@ void MultiKernel::sortDurationDecending() {
     } while(swapped);   
 }
 
+void MultiKernel::sortStartTimeAscending() {
+    int tmp = 0;
+    int c = 0;
+    for (int i = 0; i < kernel_num; i++) {
+        c = 0;
+        tmp = 0;
+        for (int j = 0; j < count; j++) {
+            if (kernel_list[i].kernel_id == block_list[j].kernel_id) {
+                if (c > 0) {
+                    kernel_list[i].start_time = MIN(block_list[j].start_time, tmp);
+                }else {
+                    kernel_list[i].start_time = block_list[j].start_time;
+                }
+                tmp = kernel_list[i].start_time;
+                c++;
+            }
+        }
+    }
+
+    bool swapped;
+    do {
+        swapped = false;
+        for (int i = 0; i < kernel_num - 1; i++) {
+            if (kernel_list[i].start_time > kernel_list[i+1].start_time) {
+                std::swap(kernel_list[i], kernel_list[i+1]);
+                swapped = true; 
+            }
+        }
+    } while(swapped); 
+}
+
 void MultiKernel::scheduler() {
     sortDurationDecending();
+    blockInfoInit();
 
-    // 
-    int yr = 0; // store the value of current thread usage
-
-
-
-
-
-
+    // Step 1: initialize resources
+    Node *root = newNode();
+    root->used = 0;
+    root->height = devProp.maxThreadsPerMultiProcessor;
+    root->width = INT_MAX;
+    root->start_point.x = 0;
+    root->start_point.y = 0;
+    root->left = NULL;
+    root->right = NULL;
+    // Step 2: fit
+    for (int i = 0; i < count; i++) {
+        Node *node;
+        Node *block_node;
+        node = findBestFit(root, block_list[i].duration, block_list[i].block_size);
+        if (node != NULL) {
+            // assign a leaf to a block
+            block_node = splitNode(&node, block_list[i].duration, block_list[i].block_size, block_list[i].kernel_id);
+            block_list[i].start_time = block_node->start_point.x;
+        }
+    }
+    sortStartTimeAscending();
 }
 
 // this should take sorted kernels as input
