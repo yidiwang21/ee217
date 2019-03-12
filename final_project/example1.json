@@ -1,10 +1,8 @@
 {
     "name": "Kernel Scheduling",
     "kernel_number": 3,
-    "sched_policy": 0,
     "kernel_entry": [
         {
-            "kernel_name":  "k1",
             "kernel_id":    1,
             "grid_size":    45,    
             "block_size":   512,
@@ -12,7 +10,6 @@
             "shared_mem":   0
         },
         {
-            "kernel_name":  "k2",
             "kernel_id":    2,
             "grid_size":    15,    
             "block_size":   1024,
@@ -20,7 +17,6 @@
             "shared_mem":   0
         },
         {
-            "kernel_name":  "k1",
             "kernel_id":    3,
             "grid_size":    75,    
             "block_size":   256,

@@ -7,12 +7,17 @@
 #include "kernel.cu"
 
 int main (int argc, char *argv[]) {
-
-    std::string filename = "config_1.json";
+    int sp;
+    std::string filename = "example3.json";
     if (access( filename.c_str(), F_OK ) == -1) { fprintf(stderr, "# File doesn't exist!\n"); exit(-1); }
 
     if (argc == 2) filename = argv[1];
-    else if (argc > 2) { fprintf(stderr, "# Usage: ./exe [file]\n"); exit(0); }
+    else if (argc == 3) {
+        filename = argv[1];
+        sp = atoi(argv[2]);
+        if (sp != 1 && sp != 0) fprintf(stderr, "# Scheduling policy must be 0 (naive) or 1 (optimum)\n");
+    }
+    else if (argc > 3) { fprintf(stderr, "# Usage: ./exe [file] [sched_policy]\n"); exit(0); }
 
     char *fn = (char *)malloc(sizeof(char) * (filename.length() + 1));
     strcpy(fn, filename.c_str());
@@ -27,7 +32,7 @@ int main (int argc, char *argv[]) {
     fclose(f);
     fc[fsize] = 0;
 
-    MultiKernel multi_kernel(fc);
+    MultiKernel multi_kernel(fc, sp);
     multi_kernel.kernelLauncher();
     
     return 0;

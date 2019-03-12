@@ -14,6 +14,8 @@
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 
+#define DRAW_TIMELINE
+
 // binary tree:
 // left subtree: spaces in the left of below part
 // right subtree: spaces in the right of above part
@@ -38,7 +40,7 @@ typedef struct Node{
 
 // keep the information for each kernel
 typedef struct {
-    char *kernel_name;
+    // char *kernel_name;
     int kernel_id;
     int block_size;     // # of threads per block
     int grid_size;      // # of blocks
@@ -68,7 +70,7 @@ typedef struct {
 class MultiKernel
 {   
 public:
-    MultiKernel(char *fn);
+    MultiKernel(char *fn, int sp);
     // ~MultiKernel();
     void kernelLauncher();
 
@@ -90,7 +92,6 @@ private:
 
     Node* root = this->newNode();
 
-    int maxBlockSize();
     void sortDurationDecending();
     void sortStartTimeAscending();
     Node* newNode();

@@ -1,38 +1,33 @@
 {
     "name": "Kernel Scheduling",
     "kernel_number": 4,
-    "sched_policy": 0,
     "kernel_entry": [
         {
-            "kernel_name":  "k1",
             "kernel_id":    1,
             "grid_size":    15,    
             "block_size":   1024,
-            "duration":     10,
+            "duration":     20,
             "shared_mem":   0
         },
         {
-            "kernel_name":  "k2",
             "kernel_id":    2,
             "grid_size":    15,    
             "block_size":   512,
-            "duration":     8,
+            "duration":     16,
             "shared_mem":   0
         },
         {
-            "kernel_name":  "k1",
             "kernel_id":    3,
             "grid_size":    15,    
             "block_size":   1024,
-            "duration":     6,
+            "duration":     12,
             "shared_mem":   0
         },
         {
-            "kernel_name":  "k1",
             "kernel_id":    4,
             "grid_size":    15,    
             "block_size":   512,
-            "duration":     5,
+            "duration":     10,
             "shared_mem":   0
         }
     ]

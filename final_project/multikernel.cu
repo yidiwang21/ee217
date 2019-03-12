@@ -1,12 +1,13 @@
 #include "multikernel.cuh"
 
 // init MultiKernel class with the input arguments
-MultiKernel::MultiKernel(char *config_file) {
-    parser = cJSON_Parse(config_file);    
+MultiKernel::MultiKernel(char *config_file, int sp) {
+    parser = cJSON_Parse(config_file);
     if (parser == NULL) {
         fprintf(stderr, "# Invalid kernel config file!\n");
         cleanUp();
     }
+    sched_policy = sp;
 }
 
 Node* MultiKernel::newNode() {
@@ -139,15 +140,6 @@ Node* MultiKernel::searchNode(Node *node, int key) {
         return NULL;
 }
 
-int MultiKernel::maxBlockSize() {
-    int area;
-    int max_area;
-    for (int i = 0; i < kernel_num; i++) {
-        max_area = MAX(kernel_list[i].duration * kernel_list[i].block_size, area);
-        area = kernel_list[i].duration * kernel_list[i].block_size;
-    }
-}
-
 void MultiKernel::blockInfoInit() {
     count = 0;  // number of blocks averagely per SM
     for (int i = 0; i < kernel_num; i++) {
@@ -277,13 +269,6 @@ void MultiKernel::kernelInfoInit() {
     }
     kernel_num = entry->valueint;
     entry = NULL;
-    entry = cJSON_GetObjectItem(parser, "sched_policy");
-    if (!entry || entry->type != cJSON_Number || entry->valueint > 2 || entry->valueint < 0) {
-        fprintf(stderr, "Invalid policy! (must be 1 ,2, 3)\n");
-        cleanUp();
-    }
-    sched_policy = entry->valueint;
-    entry = NULL;
 
     entry = cJSON_GetObjectItem(parser, "kernel_entry");
     if (!entry) {
@@ -338,7 +323,12 @@ void MultiKernel::kernelLauncher() {
     kernelInfoInit();
     GPUResourceInit();
 
-    scheduler();
+    if (sched_policy == 1) {
+        printf("# Optimal scheduling policy...\n");
+        scheduler();
+    }else {
+        printf("# Naive scheduling policy...\n");
+    }
 
     cudaError_t cuda_ret;
 
@@ -361,14 +351,13 @@ void MultiKernel::kernelLauncher() {
     }
     cudaDeviceSynchronize();
 
-    // print
     for (int i = 0; i < kernel_num; i++) {
         printf("=========================================\n");
         for (int j = 0; j < kernel_list[i].grid_size; j++) {
             // nano sec timer to ms
             kernel_list[i].block_times[j*2] = (kernel_list[i].block_times[j*2] / 1000 / 1000) % 10000;
             kernel_list[i].block_times[j*2+1] = (kernel_list[i].block_times[j*2+1] / 1000 / 1000) % 10000;
-        #if 0
+        #ifdef DRAW_TIMELINE
             printf("Block index: %d\n", j);
             printf("kernel id: %d\n", i);
             printf("SM id: %d\n", kernel_list[i].block_smids[j]);
