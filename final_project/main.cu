@@ -7,8 +7,8 @@
 #include "kernel.cu"
 
 int main (int argc, char *argv[]) {
-    int sp;
-    std::string filename = "example3.json";
+    int sp = 2;
+    std::string filename = "example1.json";
     if (access( filename.c_str(), F_OK ) == -1) { fprintf(stderr, "# File doesn't exist!\n"); exit(-1); }
 
     if (argc == 2) filename = argv[1];

@@ -1,5 +1,5 @@
 {
-    "name": "Kernel Scheduling",
+    "name": "blocked by kernels with larger block size",
     "kernel_number": 3,
     "kernel_entry": [
         {

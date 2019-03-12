@@ -1,0 +1,76 @@
+{
+    "name": "random kernels",
+    "kernel_number": 10,
+    "kernel_entry": [
+        {
+            "kernel_id":    1,
+            "grid_size":    48,    
+            "block_size":   512,
+            "duration":     20,
+            "shared_mem":   0
+        },
+        {
+            "kernel_id":    2,
+            "grid_size":    3,    
+            "block_size":   256,
+            "duration":     50,
+            "shared_mem":   0
+        },
+        {
+            "kernel_id":    3,
+            "grid_size":    17,    
+            "block_size":   256,
+            "duration":     10,
+            "shared_mem":   0
+        },
+        {
+            "kernel_id":    4,
+            "grid_size":    15,    
+            "block_size":   1024,
+            "duration":     35,
+            "shared_mem":   0
+        },
+        {
+            "kernel_id":    5,
+            "grid_size":    23,    
+            "block_size":   128,
+            "duration":     15,
+            "shared_mem":   0
+        },
+        {
+            "kernel_id":    6,
+            "grid_size":    10,    
+            "block_size":   512,
+            "duration":     40,
+            "shared_mem":   0
+        },
+        {
+            "kernel_id":    7,
+            "grid_size":    1,    
+            "block_size":   1024,
+            "duration":     80,
+            "shared_mem":   0
+        },
+        {
+            "kernel_id":    8,
+            "grid_size":    30,    
+            "block_size":   256,
+            "duration":     20,
+            "shared_mem":   0
+        },
+        {
+            "kernel_id":    9,
+            "grid_size":    12,    
+            "block_size":   128,
+            "duration":     25,
+            "shared_mem":   0
+        },
+        {
+            "kernel_id":    10,
+            "grid_size":    47,    
+            "block_size":   512,
+            "duration":     40,
+            "shared_mem":   0
+        }
+    ]
+}
