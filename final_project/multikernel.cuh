@@ -90,6 +90,9 @@ private:
     void GPUResourceInit();
     void cleanUp();
 
+    void sortDurationAscending();   // for policy 1
+    void printBlocks();
+
     Node* root = this->newNode();
 
     void sortDurationDecending();

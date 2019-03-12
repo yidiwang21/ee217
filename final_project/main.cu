@@ -15,7 +15,7 @@ int main (int argc, char *argv[]) {
     else if (argc == 3) {
         filename = argv[1];
         sp = atoi(argv[2]);
-        if (sp != 1 && sp != 0) fprintf(stderr, "# Scheduling policy must be 0 (naive) or 1 (optimum)\n");
+        if (sp != 2 && sp != 1 && sp != 0) fprintf(stderr, "# Scheduling policy must be 0 (naive) or 1 (minimum AWT) or 2 (minimum execution time)\n");
     }
     else if (argc > 3) { fprintf(stderr, "# Usage: ./exe [file] [sched_policy]\n"); exit(0); }
 

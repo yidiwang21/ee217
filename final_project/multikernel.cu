@@ -209,6 +209,19 @@ void MultiKernel::sortStartTimeAscending() {
     }
 }
 
+void MultiKernel::sortDurationAscending() {
+    bool swapped;
+    do {
+        swapped = false;
+        for (int i = 0; i < kernel_num - 1; i++) {
+            if (kernel_list[i].duration  > kernel_list[i+1].duration) {
+                std::swap(kernel_list[i], kernel_list[i+1]);
+                swapped = true; 
+            }
+        }
+    } while(swapped);
+}
+
 void MultiKernel::scheduler() {
     sortDurationDecending();
     blockInfoInit();
@@ -323,9 +336,12 @@ void MultiKernel::kernelLauncher() {
     kernelInfoInit();
     GPUResourceInit();
 
-    if (sched_policy == 1) {
-        printf("# Optimal scheduling policy...\n");
+    if (sched_policy == 2) {
+        printf("# Scheduling policy 2: minimum execution time...\n");
         scheduler();
+    }else if (sched_policy == 1) {
+        printf("# Scheduling policy 1: minimum AWT...\n");
+        sortDurationAscending();
     }else {
         printf("# Naive scheduling policy...\n");
     }
@@ -351,20 +367,24 @@ void MultiKernel::kernelLauncher() {
     }
     cudaDeviceSynchronize();
 
+    #ifdef DRAW_TIMELINE
+    printBlocks();
+    #endif
+}
+
+void MultiKernel::printBlocks() {
     for (int i = 0; i < kernel_num; i++) {
         printf("=========================================\n");
         for (int j = 0; j < kernel_list[i].grid_size; j++) {
             // nano sec timer to ms
             kernel_list[i].block_times[j*2] = (kernel_list[i].block_times[j*2] / 1000 / 1000) % 10000;
             kernel_list[i].block_times[j*2+1] = (kernel_list[i].block_times[j*2+1] / 1000 / 1000) % 10000;
-        #ifdef DRAW_TIMELINE
             printf("Block index: %d\n", j);
             printf("kernel id: %d\n", i);
             printf("SM id: %d\n", kernel_list[i].block_smids[j]);
             printf("start time: %lu\n", kernel_list[i].block_times[j*2]);
             printf("stop time: %lu\n", kernel_list[i].block_times[j*2+1]);
             printf("elapsed time: %lu\n\n", kernel_list[i].block_times[j*2+1] - kernel_list[i].block_times[j*2]);
-        #endif
         }
     }
 }
