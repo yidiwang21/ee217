@@ -58,7 +58,8 @@ At t = 0, the resources are sufficient, 3 blocks of k1 will be assigned to a SM,
 At t = 20, all of the 3 blocks of k1 finishes, then k2 can start running. Now the number of available threads = 2048 - 1024 = 1024, so, another 4 blocks of k3 can be also assigned.
 At t = 40, blocks which start running at t = 20 finishes, then the last block of K2 can start.
 * Expected total running time: 3 * (single kernel time)
-* Actual elapsed time: ~60ms
+* Actual elapsed time: ~60ms </br>
+![example1_naive](https://github.com/yidiwang21/ee217/blob/master/final_project/figs/example1_naive.png?raw=true)
 
 #### Optimal Scheduling Policy
 * Kernel launching order: {k2, k1, k3}
@@ -66,7 +67,8 @@ At t = 40, blocks which start running at t = 20 finishes, then the last block of
 At t = 0, the resources are sufficient, one block of k2 will be assigned to a SM, the available number of threads on this SM = 2048 - 1024 = 1024, which is sufficient for 2 blocks of k1 to run simultaneously.
 At t = 20, all of the blocks which started at t = 0 finishes. There are sufficient resources for all of the rest blocks.
 * Expected total running time: 2 * (single kernel time)
-* Actual elapsed time: ~40ms
+* Actual elapsed time: ~40ms </br>
+![example1_opt](https://github.com/yidiwang21/ee217/blob/master/final_project/figs/example1_opt.png?raw=true)
 
 ### Scenario 2: blocked by kernels with smaller block size (example2.json)
 (A counterexample on "Longer execution time first")
@@ -82,13 +84,15 @@ At t = 20, all of the blocks which started at t = 0 finishes. There are sufficie
 * Kernel launching order: {k1, k2, k3, k4}
 * Expected results: (on one SM)
 At the beginning, k1 and k2 can be launched, k3 will wait since the available number of threads = 2048 - 1024 - 512 = 512 is not sufficient, and it blocks k4. After k2 finishes execution, k3 can start at t = 16. Finally k4 can start after k1 finishes at t = 20.
-* Elapsed time: ~30ms
+* Elapsed time: ~30ms </br>
+![example2_naive](https://github.com/yidiwang21/ee217/blob/master/final_project/figs/example2_naive.png?raw=true)
 
 #### Optimal Scheduling Policy
 * Kernel launching order: {k1, k2, k4, k3}
 * Expected results: (on one SM)
 At the beginning, k1, k2 and k4 can be launched, and k3 will wait. After k2 finishes execution at t = 16, k3 can start running.
-* Elapsed time: ~28ms
+* Elapsed time: ~28ms </br>
+![example2_opt](https://github.com/yidiwang21/ee217/blob/master/final_project/figs/example2_opt.png?raw=true)
 
 ### Scenario 3: blocked by kernels with smaller block duration (example3.json)
 (A counterexample on "Bigger block size first")
@@ -103,13 +107,15 @@ At the beginning, k1, k2 and k4 can be launched, and k3 will wait. After k2 fini
 * Kernel launching order: {k1, k2, k3}
 * Expected results: (on one SM)
 At t = 0, k1 and k2 will be launched. At t = 20, k1 finishes execution and k3 will start.
-* Elapsed time: ~70ms
+* Elapsed time: ~70ms </br>
+![example3_naive](https://github.com/yidiwang21/ee217/blob/master/final_project/figs/example3_naive.png?raw=true)
 
 #### Optimal Scheduling Policy
 * Kernel launching order: {k3, k2, k1}
 * Expected results: (on one SM)
 At t = 0, k3 and k2 will be launched. At t = 30, k2 finishes execution and k1 will start.
-* Elapsed time: ~50ms
+* Elapsed time: ~50ms </br>
+![example3_opt](https://github.com/yidiwang21/ee217/blob/master/final_project/figs/example3_opt.png?raw=true)
 
 
 
