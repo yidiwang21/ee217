@@ -81,7 +81,8 @@ int main() {
     for (int i = 0; i < STREAM_NUM; i++) {
         GPUSpin <<<kernel_list[i].gird_size, kernel_list[i].block_size, 0, streams[i]>>>(SPIN_TIME, &block_times_d[i * GRID_SIZE * 2], &block_smids_d[i * GRID_SIZE]);
     }
-    cudaDeviceSynchronize();
+    cuda_ret = cudaDeviceSynchronize();
+    if (cuda_ret != cudaSuccess) { fprintf(stderr, "Unable to launch kernel!\n"); exit(-1); }
 
     for (int i = 0; i < STREAM_NUM; i++) {
         cudaMemcpy(block_times[i], &block_times_d[i * GRID_SIZE * 2], sizeof(uint64_t) * 2 * GRID_SIZE, cudaMemcpyDeviceToHost);

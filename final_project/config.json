@@ -6,25 +6,25 @@
         {
             "kernel_name":  "k1",
             "kernel_id":    1,
-            "grid_size":    57,    
+            "grid_size":    45,    
             "block_size":   512,
-            "duration":     20000000,
+            "duration":     20,
             "shared_mem":   0
         },
         {
             "kernel_name":  "k2",
             "kernel_id":    2,
-            "grid_size":    19,    
+            "grid_size":    15,    
             "block_size":   1024,
-            "duration":     20000000,
+            "duration":     20,
             "shared_mem":   0
         },
         {
             "kernel_name":  "k1",
             "kernel_id":    3,
-            "grid_size":    95,    
+            "grid_size":    75,    
             "block_size":   256,
-            "duration":     20000000,
+            "duration":     20,
             "shared_mem":   0
         }
     ]

@@ -12,6 +12,7 @@
 // currently support one GPU
 #define SM_NUM  15  // 1070
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
 
 // binary tree:
 // left subtree: spaces in the left of below part
@@ -24,8 +25,9 @@ typedef struct {
 typedef struct Node{
     bool used;
     int height;
-    int width;
+    uint64_t width;
     int kernel_id;  // 0 for empty space
+    bool growable;  // left always cannot grow
     struct Node *left;
     struct Node *right;
     struct Node *parent;
@@ -86,11 +88,17 @@ private:
     void GPUResourceInit();
     void cleanUp();
 
+    Node* root = this->newNode();
+
+    int maxBlockSize();
     void sortDurationDecending();
     void sortStartTimeAscending();
     Node* newNode();
-    Node* findBestFit(Node *root, int w, int h);
+    Node* findBestFit(Node *node, int w, int h);
     Node* splitNode(Node **node, int w, int h, int kid);
+    Node* growNode(Node *node, int w, int h, int kid);
+    Node* searchNode(Node* node, int key);
+    int findMinUnusedToGrow(Node *node, int h);
 };
 
 

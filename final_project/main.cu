@@ -8,7 +8,8 @@
 
 int main (int argc, char *argv[]) {
 
-    std::string filename = "config.json";
+    std::string filename = "config_1.json";
+    if (access( filename.c_str(), F_OK ) == -1) { fprintf(stderr, "# File doesn't exist!\n"); exit(-1); }
 
     if (argc == 2) filename = argv[1];
     else if (argc > 2) { fprintf(stderr, "# Usage: ./exe [file]\n"); exit(0); }
