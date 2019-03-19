@@ -1,0 +1,218 @@
+% \documentclass[letterpaper, 10 pt, conference]{ieeeconf}
+\documentclass[12pt,journal,compsoc]{IEEEtran}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{mathptmx}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+\begin{document}
+
+\title{\LARGE \bf GPU Block-Level Scheduling Method for Concurrent Kernels}
+
+\author{\IEEEauthorblockN{Yidi Wang} \\
+\IEEEauthorblockA{University of California, Riverside\\
+yidi.wang@email.ucr.edu}
+}
+
+\maketitle
+
+\begin{abstract}
+Increasing amount of resources is available on current GPU, and concurrent kernel execution is allowed. However, the GPU resource usage is highly dependent on the submission order of kernels. In this project, an approach is proposed to reorder the concurrent kernels to reduce the total execution time and improve GPU resource utilization. 
+\end{abstract}
+
+
+\section{INTRODUCTION}
+Nowadays, Graphics Processing Units (GPUs) are becoming more and more popular because of their outstanding and low-cost performance on parallelism compared to tranditional CPUs. The cost of rapid development of GPUs is that, the performance of GPUs are highly determined by some restrictions such as register file size, shared memory size, limit of threads number, etc. 
+
+Users can make multiple kernels to run simultaneously by creating multiple streams and assigning different independent kernels onto those streams, in order to highly utilize the GPU resources and accelerate execution. The execution unit of a kernel is the thread block. Blocks are created during runtime and the number of blocks are defined by user when launching the kernel. The blocks are distributed to different Multiprocessors (SMs) to be processed. Whether a block can be assigned to a SM and start running is determined by the current available "spaces" of a SM. The limitations are number of threads and the size of shared memory per SM.
+
+The things to consider for a GPU scheduling policy should be different from CPU tasks scheduling. Because GPU resource limitations may stall the blocks in the kernel to run simultaneously, the optimal solution for CPU tasks may not work for GPU cases.
+
+When a set of concurrent kernels are released, they are actually ordered in a FIFO queue. Because of the resource limitations, the hardware behaviors may differ when the kernels are reodered differently in the queue. For example, Figure 1 
+% TODO:
+
+Motivated by the above consideration and scenario, this project proposed a scheduling method for concurrent kernels. The method is based on the analysis of required resources of blocks. 
+The contribution of the project are:
+\begin{itemize}
+   \item The proposed approach models the problem of deciding the submission order of a set of concurrent kernels as a growing 2D bin packing problem. The GPU resources are modeled to be the boundary of a rectangle bin, which can grow on the timeline. In this project, only the resource of number of threads per SM is considered.
+   \item Shortest Job First (SJF) scheduling policy is implemented for GPU kernels. Naive approach, SJF approach and the proposed approach are compared in the evaluation part. The results are showed that the proposed approach can speedup execution while SJF is not to be optimum for GPU kernel scheduling.
+\end{itemize}
+
+
+\section{Related Works}
+% TODO:
+
+
+\section{SYSTEMS WORK}
+
+\subsection{Problem Simplification for Block-Level Scheduling}
+The submission order of concurrent kernels are determined by the resources each block is going to consume. In order to simulate the block timelines, the maximum average number of blocks that will be assigned to each SM is considered. For example, a kernel has 16 blocks and the GPU has 15 SMs, then the number of blocks per SM is that $\frac{(16-1)}{15} + 1 = 2$.
+\subsection{Dynamic Resource Mapping}
+I created a rectangle to illustrate the resource usage. The y axis represent the number of used threads on one SM, and it has a ceiling of 2048 in the example as showed in Figure 2. The x axis represent the timeline. The rectangle is growable in this direction.  Each rectangle represent a chunk of resources in terms of the number of threads and time. Each time a block is fitted into the map, it will occupy one existing rectangle, and created two more rectangles. Iteratively, the blocks are fitted into the resource map from bottom to top, and left to right.
+\subsection{Growing 2D Bin Packing}
+At initialization, the kernels are sorted with block duration in descending order. Because of the features of the resource map mentioned above, a binary tree is used to store the represented resources of all the sub-rectangles. In the beginning, the size of the root rectangle is determined by the maximum number of threads one SM can accommodate by the execution time of the first block that is going to be fitted. Once a block is assigned, it will occupy the root of a subtree, and the two newly created rectangles are stored into its children. The left child represents the resources above the last assigned block, and the resource is dominant by only factor I considered in this project - the number of available threads on one SM. On the other hand, the right child represents the resources on the right of the block, and it can grow in the direction of time. Note thattThe left child will always be marked "ungrowable" since the current block can not have a longer duration than the previous ones. The situation that a space at the left of another block is found to be the best to grow will never happen, because if the algorithm let it grow, it may overlap with its right occupied spaces.
+\subsection{Greedy Choice}
+Every time when a block is going to be assigned, the algorithm will search for a "best fit" empty space. If such a space with sufficient resources does not exist, then the algorithm will grow the rectangle that has sufficient resources and has the minimum start point.
+
+
+\section{Baselines}
+\subsection{Parameters} 
+\begin{itemize}
+\item Block duration: it is set in "duration" field in the json file. Measuring unit is millisecond.
+\item Block duration with $duration=0$: this is neglectable (~2us) compared to the set duration.
+\item Block running time: this equals to what is set to "duration", and does not change when block size or grid size is set differently.
+\end{itemize}
+\subsection{Platform}
+\begin{itemize}
+   \item GPU model: GeForce GTX 1070 
+   \item CUDA version: Cuda 10.1
+\end{itemize}
+
+\subsection{Resource Limit}
+\begin{itemize}
+   \item Number of multiprocessors: : 15
+   \item Maximum number of blocks per multiprocessor: 32
+   \item Maximum number of threads per multiprocessor: 2048
+   \item Maximum number of threads per block: 1024
+\end{itemize}
+
+\subsection{Single Kernel}
+\subsubsection{Below the threads number limit}
+\begin{itemize}
+   \item Duration: 20ms
+   \item Block size: 1024
+   \item Grid size: 15
+   \item Actual running time: ~20ms
+   \item Observation: All 15 blocks can be assigned to SMs at the same time, and they finishes at the same time.
+\end{itemize}
+\subsubsection{Exceeding the threads number limit}
+\begin{itemize}
+   \item Duration: $20ms$
+   \item Block size: 1024
+   \item Grid size: 45
+   \item Actual running time: ~20ms
+   \item Observation: In this case, the first 30 blocks are assigned to 15 SMs, and start running simultaneously. Due to the resource limitation, the last 15 blocks will wait until there are sufficient resources.
+\end{itemize}
+
+
+\section{EVALUATION}
+\subsection{Measurements}
+\begin{itemize}
+   \item Execution time
+   \item Average response time
+   \item Average waiting time
+\end{itemize}
+
+
+
+
+
+\subsection{Headings, etc}
+
+Text heads organize the topics on a relational, hierarchical basis. For example, the paper title is the primary text head because all subsequent material relates and elaborates on this one topic. If there are two or more sub-topics, the next level head (uppercase Roman numerals) should be used and, conversely, if there are not at least two sub-topics, then no subheads should be introduced. Styles named ÒHeading 1Ó, ÒHeading 2Ó, ÒHeading 3Ó, and ÒHeading 4Ó are prescribed.
+
+\subsection{Figures and Tables}
+
+Positioning Figures and Tables: Place figures and tables at the top and bottom of columns. Avoid placing them in the middle of columns. Large figures and tables may span across both columns. Figure captions should be below the figures; table heads should appear above the tables. Insert figures and tables after they are cited in the text. Use the abbreviation ÒFig. 1Ó, even at the beginning of a sentence.
+
+\begin{table}[h]
+\caption{An Example of a Table}
+\label{table_example}
+\begin{center}
+\begin{tabular}{|c||c|}
+\hline
+One & Two\\
+\hline
+Three & Four\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+   \begin{figure}[thpb]
+      \centering
+      \framebox{\parbox{3in}{We suggest that you use a text box to insert a graphic (which is ideally a 300 dpi TIFF or EPS file, with all fonts embedded) because, in an document, this method is somewhat more stable than directly inserting a picture.
+}}
+      %\includegraphics[scale=1.0]{figurefile}
+      \caption{Inductance of oscillation winding on amorphous
+       magnetic core versus DC bias magnetic field}
+      \label{figurelabel}
+   \end{figure}
+   
+
+Figure Labels: Use 8 point Times New Roman for Figure labels. Use words rather than symbols or abbreviations when writing Figure axis labels to avoid confusing the reader. As an example, write the quantity ÒMagnetizationÓ, or ÒMagnetization, MÓ, not just ÒMÓ. If including units in the label, present them within parentheses. Do not label axes only with units. In the example, write ÒMagnetization (A/m)Ó or ÒMagnetization {A[m(1)]}Ó, not just ÒA/mÓ. Do not label axes with a ratio of quantities and units. For example, write ÒTemperature (K)Ó, not ÒTemperature/K.Ó
+
+\section{CONCLUSIONS}
+
+A conclusion section is not required. Although a conclusion may review the main points of the paper, do not replicate the abstract as the conclusion. A conclusion might elaborate on the importance of the work or suggest applications and extensions. 
+
+\addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
+                                  % on the last page of the document manually. It shortens
+                                  % the textheight of the last page by a suitable amount.
+                                  % This command does not take effect until the next page
+                                  % so it should come on the page before the last. Make
+                                  % sure that you do not shorten the textheight too much.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{APPENDIX}
+
+Appendixes should appear before the acknowledgment.
+
+\section*{ACKNOWLEDGMENT}
+
+The preferred spelling of the word ÒacknowledgmentÓ in America is without an ÒeÓ after the ÒgÓ. Avoid the stilted expression, ÒOne of us (R. B. G.) thanks . . .Ó  Instead, try ÒR. B. G. thanksÓ. Put sponsor acknowledgments in the unnumbered footnote on the first page.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+References are important to the reader; therefore, each citation must be complete and correct. If at all possible, references should be commonly available publications.
+
+
+
+\begin{thebibliography}{99}
+
+\bibitem{c1} G. O. Young, ÒSynthetic structure of industrial plastics (Book style with paper title and editor),Ó 	in Plastics, 2nd ed. vol. 3, J. Peters, Ed.  New York: McGraw-Hill, 1964, pp. 15Ð64.
+\bibitem{c2} W.-K. Chen, Linear Networks and Systems (Book style).	Belmont, CA: Wadsworth, 1993, pp. 123Ð135.
+\bibitem{c3} H. Poor, An Introduction to Signal Detection and Estimation.   New York: Springer-Verlag, 1985, ch. 4.
+\bibitem{c4} B. Smith, ÒAn approach to graphs of linear forms (Unpublished work style),Ó unpublished.
+\bibitem{c5} E. H. Miller, ÒA note on reflector arrays (Periodical styleÑAccepted for publication),Ó IEEE Trans. Antennas Propagat., to be publised.
+\bibitem{c6} J. Wang, ÒFundamentals of erbium-doped fiber amplifiers arrays (Periodical styleÑSubmitted for publication),Ó IEEE J. Quantum Electron., submitted for publication.
+\bibitem{c7} C. J. Kaufman, Rocky Mountain Research Lab., Boulder, CO, private communication, May 1995.
+\bibitem{c8} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ÒElectron spectroscopy studies on magneto-optical media and plastic substrate interfaces(Translation Journals style),Ó IEEE Transl. J. Magn.Jpn., vol. 2, Aug. 1987, pp. 740Ð741 [Dig. 9th Annu. Conf. Magnetics Japan, 1982, p. 301].
+\bibitem{c9} M. Young, The Techincal Writers Handbook.  Mill Valley, CA: University Science, 1989.
+\bibitem{c10} J. U. Duncombe, ÒInfrared navigationÑPart I: An assessment of feasibility (Periodical style),Ó IEEE Trans. Electron Devices, vol. ED-11, pp. 34Ð39, Jan. 1959.
+\bibitem{c11} S. Chen, B. Mulgrew, and P. M. Grant, ÒA clustering technique for digital communications channel equalization using radial basis function networks,Ó IEEE Trans. Neural Networks, vol. 4, pp. 570Ð578, July 1993.
+\bibitem{c12} R. W. Lucky, ÒAutomatic equalization for digital communication,Ó Bell Syst. Tech. J., vol. 44, no. 4, pp. 547Ð588, Apr. 1965.
+\bibitem{c13} S. P. Bingulac, ÒOn the compatibility of adaptive controllers (Published Conference Proceedings style),Ó in Proc. 4th Annu. Allerton Conf. Circuits and Systems Theory, New York, 1994, pp. 8Ð16.
+\bibitem{c14} G. R. Faulhaber, ÒDesign of service systems with priority reservation,Ó in Conf. Rec. 1995 IEEE Int. Conf. Communications, pp. 3Ð8.
+\bibitem{c15} W. D. Doyle, ÒMagnetization reversal in films with biaxial anisotropy,Ó in 1987 Proc. INTERMAG Conf., pp. 2.2-1Ð2.2-6.
+\bibitem{c16} G. W. Juette and L. E. Zeffanella, ÒRadio noise currents n short sections on bundle conductors (Presented Conference Paper style),Ó presented at the IEEE Summer power Meeting, Dallas, TX, June 22Ð27, 1990, Paper 90 SM 690-0 PWRS.
+\bibitem{c17} J. G. Kreifeldt, ÒAn analysis of surface-detected EMG as an amplitude-modulated noise,Ó presented at the 1989 Int. Conf. Medicine and Biological Engineering, Chicago, IL.
+\bibitem{c18} J. Williams, ÒNarrow-band analyzer (Thesis or Dissertation style),Ó Ph.D. dissertation, Dept. Elect. Eng., Harvard Univ., Cambridge, MA, 1993. 
+\bibitem{c19} N. Kawasaki, ÒParametric study of thermal and chemical nonequilibrium nozzle flow,Ó M.S. thesis, Dept. Electron. Eng., Osaka Univ., Osaka, Japan, 1993.
+\bibitem{c20} J. P. Wilkinson, ÒNonlinear resonant circuit devices (Patent style),Ó U.S. Patent 3 624 12, July 16, 1990. 
+
+
+
+
+
+
+\end{thebibliography}
+
+
+
+
+\end{document}
