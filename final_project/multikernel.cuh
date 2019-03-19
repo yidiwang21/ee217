@@ -14,7 +14,7 @@
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 
-#define DRAW_TIMELINE
+// #define DRAW_TIMELINE
 
 // binary tree:
 // left subtree: spaces in the left of below part
@@ -26,6 +26,7 @@ typedef struct {
 
 typedef struct Node{
     bool used;
+    bool closed;
     int height;
     uint64_t width;
     int kernel_id;  // 0 for empty space
@@ -99,10 +100,13 @@ private:
     void sortStartTimeAscending();
     Node* newNode();
     Node* findBestFit(Node *node, int w, int h);
-    Node* splitNode(Node **node, int w, int h, int kid);
+    // Node* splitNode(Node **node, int w, int h, int kid);
+    // FIXME:
+    Node* splitNode(Node *node, int w, int h, int kid);
     Node* growNode(Node *node, int w, int h, int kid);
-    Node* searchNode(Node* node, int key);
+    Node* searchNode(Node* node, int key, Node *node_const);
     int findMinUnusedToGrow(Node *node, int h);
+    void updateParentsRight(Node *node, int w, int h, int stp);
 };
 
 
