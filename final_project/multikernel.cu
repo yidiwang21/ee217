@@ -60,22 +60,6 @@ Node* MultiKernel::splitNode(Node *node, int w, int h, int kid) {
         node->right->height = 0;
         node->right->closed = 1;
     }
-    // else if (node->start_point.x + node->width > root->width && node != root) {
-    //     printf("222222222222222222222222222\n");
-    //     node->right->start_point.y = 0;
-    //     node->right->height = devProp.maxThreadsPerMultiProcessor;
-    //     // TODO: consolidate: merge 
-    //     Node *node_to_clean = searchNode(root, node->right->start_point.x, node->right);
-    //     if (node_to_clean != NULL) {
-    //         printf("Parent of node_to_clean: %d\n", node_to_clean->parent->kernel_id);
-    //         node_to_clean->used = 1;
-            
-    //     }else {
-    //         printf("333333333333333333333\n");
-    //         node_to_clean->height = node->start_point.y - node_to_clean->start_point.y;
-    //         node_to_clean->width = node->start_point.x + node->width - node_to_clean->start_point.x - node_to_clean->width;
-    //     }
-    // }
 
     return node;
 }
@@ -108,18 +92,15 @@ void MultiKernel::updateParentsRight(Node *node, int w, int h, int stp) {
     }
     node = node->parent->parent->right;
 
-    printf("judge range = (%d, %d)\n", stp, stp+w);
-    printf("point = %d\n", node->start_point.x);
+    // printf("judge range = (%d, %d)\n", stp, stp+w);
+    // printf("point = %d\n", node->start_point.x);
     while (1) {
-        printf("........................\n");
         if (node->parent == root || node == root)
             break;
 
         if (node->start_point.x < stp + w && node->start_point.x >= stp) {
             if (node->height >= h) {
-                printf("Update height of node, whose parent is %d\n", node->parent->kernel_id);
                 node->height -= h;
-                printf("New height = %d\n", node->height);
             }       
         }
         if (node->parent == NULL || node->parent->parent == NULL || node->parent->parent->right == NULL) continue;
@@ -131,7 +112,6 @@ void MultiKernel::updateParentsRight(Node *node, int w, int h, int stp) {
 Node* MultiKernel::growNode(Node *node, int w, int h, int kid) {
     // bool canGrowRight = (w < root->width);
     if (node == root) { // then grow right
-        printf("The node to grow is root.\n");
         root->used = 1;
         root->start_point.x = 0;
         root->start_point.y = 0;
@@ -149,7 +129,6 @@ Node* MultiKernel::growNode(Node *node, int w, int h, int kid) {
         else
             return NULL;
     }else {
-        printf("The node to grow is not root, height is %d.\n", node->height);
         node->used = 1;
         node->growable = 0;
         node->width = w;
@@ -160,7 +139,6 @@ Node* MultiKernel::growNode(Node *node, int w, int h, int kid) {
         root->right->start_point.x = root->width;
         root->right->start_point.y = 0;
         root->right->width = node->start_point.x + node->width - root->width;
-        // FIXME: root->right->height = root->height;
 
         // best fit is node i this case
         return splitNode(node, w, h, kid);
@@ -293,15 +271,14 @@ void MultiKernel::scheduler() {
     for (int i = 0; i < count; i++) {
         Node *node;
         Node *block_node;
-        printf("=======================================\n");
-        printf("# Assigning block %d:\n", i+1);
+        // printf("=======================================\n");
+        // printf("# Assigning block %d:\n", i+1);
         node = findBestFit(root, block_list[i].duration, block_list[i].block_size);
         if (node != NULL) {
-            printf("Found an empty space!\n");
             block_node = splitNode(node, block_list[i].duration, block_list[i].block_size, block_list[i].kernel_id);
             block_list[i].start_time = block_node->start_point.x;
-            printf("x = %d\n", block_node->start_point.x);
-            printf("y = %d\n", block_node->start_point.y);
+            // printf("x = %d\n", block_node->start_point.x);
+            // printf("y = %d\n", block_node->start_point.y);
             
             // FIXME:
             updateParentsRight(block_node, (block_node)->width, (block_node)->height, (block_node)->start_point.x);
@@ -311,7 +288,7 @@ void MultiKernel::scheduler() {
             // printf("above space height = %d\n", block_node->left->height);
         }
         else if (node == NULL ){
-            printf("Growing node... height = %d\n", block_list[i].block_size);
+            // printf("Growing node... height = %d\n", block_list[i].block_size);
             int min = findMinUnusedToGrow(root, block_list[i].block_size);
             // printf("The min x to grow is %d\n", min);
             Node* node_to_grow = searchNode(root, min, NULL);
@@ -320,8 +297,8 @@ void MultiKernel::scheduler() {
 
             block_node = growNode(node_to_grow, block_list[i].duration, block_list[i].block_size, block_list[i].kernel_id);
             block_list[i].start_time = block_node->start_point.x;
-            printf("x = %d\n", block_node->start_point.x);
-            printf("y = %d\n", block_node->start_point.y);
+            // printf("x = %d\n", block_node->start_point.x);
+            // printf("y = %d\n", block_node->start_point.y);
 
             updateParentsRight(block_node, (block_node)->width, (block_node)->height, (block_node)->start_point.x);
 

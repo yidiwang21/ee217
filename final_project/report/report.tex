@@ -49,11 +49,23 @@ The contribution of the project are:
 \subsection{Problem Simplification for Block-Level Scheduling}
 The submission order of concurrent kernels are determined by the resources each block is going to consume. In order to simulate the block timelines, the maximum average number of blocks that will be assigned to each SM is considered. For example, a kernel has 16 blocks and the GPU has 15 SMs, then the number of blocks per SM is that $\frac{(16-1)}{15} + 1 = 2$.
 \subsection{Dynamic Resource Mapping}
-I created a rectangle to illustrate the resource usage. The y axis represent the number of used threads on one SM, and it has a ceiling of 2048 in the example as showed in Figure 2. The x axis represent the timeline. The rectangle is growable in this direction.  Each rectangle represent a chunk of resources in terms of the number of threads and time. Each time a block is fitted into the map, it will occupy one existing rectangle, and created two more rectangles. Iteratively, the blocks are fitted into the resource map from bottom to top, and left to right.
+I created a rectangle to illustrate the resource usage. The y axis represent the number of used threads on one SM, and it has a ceiling of 2048 in the example as showed in Figure 2. The x axis represent the timeline. The rectangle is growable in this direction.  Each rectangle represent a chunk of resources in terms of the number of threads and time. Each time a block is fitted into the map, it will occupy one existing rectangle, and created two more rectangles. Iteratively, the blocks are fitted into the resource map from bottom to top, and left to right.\par
+
+\begin{figure}[h]
+   \centering
+   \includegraphics[width=0.45\textwidth, height=100pt]{figs/timeline_policy2.png}
+   \caption{An illustration of 2D bin packing}
+   \label{fig:policy}
+\end{figure}
+
 \subsection{Growing 2D Bin Packing}
-At initialization, the kernels are sorted with block duration in descending order. Because of the features of the resource map mentioned above, a binary tree is used to store the represented resources of all the sub-rectangles. In the beginning, the size of the root rectangle is determined by the maximum number of threads one SM can accommodate by the execution time of the first block that is going to be fitted. Once a block is assigned, it will occupy the root of a subtree, and the two newly created rectangles are stored into its children. The left child represents the resources above the last assigned block, and the resource is dominant by only factor I considered in this project - the number of available threads on one SM. On the other hand, the right child represents the resources on the right of the block, and it can grow in the direction of time. Note thattThe left child will always be marked "ungrowable" since the current block can not have a longer duration than the previous ones. The situation that a space at the left of another block is found to be the best to grow will never happen, because if the algorithm let it grow, it may overlap with its right occupied spaces. The time complexity of the algorithm is $O(n^2)$.
+At initialization, the kernels are sorted with block duration in descending order. Because of the features of the resource map mentioned above, a binary tree is used to store the represented resources of all the sub-rectangles. In the beginning, the size of the root rectangle is determined by the maximum number of threads one SM can accommodate by the execution time of the first block that is going to be fitted. Once a block is assigned, it will occupy the root of a subtree, and the two newly created rectangles are stored into its children. The left child represents the resources above the last assigned block, and the resource is dominant by only factor I considered in this project - the number of available threads on one SM. On the other hand, the right child represents the resources on the right of the block, and it can grow in the direction of time. Note thattThe left child will always be marked "ungrowable" since the current block can not have a longer duration than the previous ones. The situation that a space at the left of another block is found to be the best to grow will never happen, because if the algorithm let it grow, it may overlap with its right occupied spaces. The time complexity of the algorithm is $O(n^2)$.\par
+
+
 \subsection{Greedy Choice}
-Every time when a block is going to be assigned, the algorithm will search for a "best fit" empty space. If such a space with sufficient resources does not exist, then the algorithm will grow the rectangle that has sufficient resources and has the minimum start point.
+Every time when a block is going to be assigned, the algorithm will search for a "best fit" empty space. If such a space with sufficient resources does not exist, then the algorithm will grow the rectangle that has sufficient resources and has the minimum start point.\par
+
+
 
 
 \section{Baselines}
@@ -95,7 +107,7 @@ Three metrics are used here to evaluate the performance the SJF policy and the p
 \subsection{Block-level kernel scheduling}
 \textit{Example.}
 % TODO: 
-Fig.\ref{fig:scenario1} depicts the block timeline produced by this experiment. Representaton $K_i:j$ means the $j$ th block of kernel $K_i$. As table\ref{table:scenario1_kernel} shows, three independent concurrent kernels, K1, K2, K3 were launched concurrently on different streams. For and simplification and symmetry, their durations are all set to be 20ms and grid size are all multiple of 15, so the same number of blocks of each kernel can be assigned to each SM evenly. If Naive Scheduling Policy (FIFO) was used, the launching order was default. The detailed block timeline on the first SM under FIFO and SJF is shown in Fig.\ref{fig:scenario1_naive}. At t = 0, the resources were sufficient, three blocks of K1 would be assigned to a SM, the remaining available number of threads on this SM was 512. Since one block of K2 requires 1024 threads, it could not start running at t = 0. At t = 20, all of the three blocks of k1 finished execution, then K2 could start running, and the number of available threads became 1024. Another four blocks of K3 can be also assigned. At t = 40, blocks which started running at t = 20 finished, then the last block of K3 could start. The blocks were divided into three groups to run, so the total running time was 3 times of a single block duration. The same behaviour was also oberved under SJF scheduling policy. From the kernel aspective, the timeline is shown as in Fig.\ref{fig:scenario1_kernel_naive}.
+Fig.\ref{fig:scenario1} depicts the block timeline produced by this experiment. Representaton $K_i:j$ means the $j$ th block of kernel $K_i$. As table\ref{table:scenario1_kernel} shows, three independent concurrent kernels, K1, K2, K3 were launched concurrently on different streams. For and simplification and symmetry, their durations are all set to be 20ms and grid size are all multiple of 15, so the same number of blocks of each kernel can be assigned to each SM evenly. If Naive Scheduling Policy (FIFO) was used, the launching order was default. The detailed block timeline on the first SM under FIFO and SJF is shown in Fig.\ref{fig:scenario1_naive}. At t = 0, the resources were sufficient, three blocks of K1 would be assigned to a SM, the remaining available number of threads on this SM was 512. Since one block of K2 requires 1024 threads, it could not start running at t = 0. At t = 20, all of the three blocks of k1 finished execution, then K2 could start running, and the number of available threads became 1024. Another four blocks of K3 can be also assigned. At t = 40, blocks which started running at t = 20 finished, then the last block of K3 could start. The blocks were divided into three groups to run, so the total running time was 3 times of a single block duration. The same behaviour was also oberved under SJF scheduling policy. From the kernel aspective, the timeline is shown as in Fig.\ref{fig:scenario1_kernel_naive}.\par
 
 \begin{table}[h]
    \caption{Kernels used in scenario in Fig.\ref{fig:scenario1}}
@@ -112,12 +124,6 @@ Fig.\ref{fig:scenario1} depicts the block timeline produced by this experiment. 
    \label{table:scenario1_kernel}
 \end{table}
 
-The proposed scheduling policy, "EE217", reordered the kernels to maximize the resource utilization to reduce the execution time. The detailed block timeline on the first SM under FIFO and SJF is shown in Fig.\ref{fig:scenario1_opt}. Under this policy, at t = 0, the resources were sufficient, one block of K2 was assigned to a SM. The remaining available number of threads on this SM became 1024, which was also sufficient for two blocks of K1 to run simultaneously. At t = 20, all of the blocks which started at t = 0 finished. There were sufficient resources for all of the rest. The blocks were only divided into two groups, so the total running time was double of a single block duration. From the kernel aspective, the timeline is shown as in Fig.\ref{fig:scenario1_kernel_opt}.
-
- The results listed in table\ref{table:scenario1_result} show that SJF on GPU may not give an optimal average response time. The execution time is dependent on the kernel submission order to the hardware, and it can be reduced if they are reordered properly. In this case, a $100\%$ utilization and a 1.5 times speedup can be achieved by the proposed menthod.\par
-
-
-
 \begin{table*}[h]
    \caption{Kernels used in scenario in Fig.\ref{fig:scenario1}}
    \centering
@@ -133,7 +139,7 @@ The proposed scheduling policy, "EE217", reordered the kernels to maximize the r
    \label{table:scenario1_result}
 \end{table*}
 
-\begin{figure*}[!ht]
+\begin{figure*}[h]
    \centering
    \begin{subfigure}{0.48\textwidth}
       \includegraphics[width=\textwidth, height=120pt]{figs/scenario1_naive.png}
@@ -158,6 +164,13 @@ The proposed scheduling policy, "EE217", reordered the kernels to maximize the r
    \caption{Block timeline in scenario 1 on one SM}
    \label{fig:scenario1}
 \end{figure*}
+
+The proposed scheduling policy, "EE217", reordered the kernels to maximize the resource utilization to reduce the execution time. The detailed block timeline on the first SM under FIFO and SJF is shown in Fig.\ref{fig:scenario1_opt}. Under this policy, at t = 0, the resources were sufficient, one block of K2 was assigned to a SM. The remaining available number of threads on this SM became 1024, which was also sufficient for two blocks of K1 to run simultaneously. At t = 20, all of the blocks which started at t = 0 finished. There were sufficient resources for all of the rest. The blocks were only divided into two groups, so the total running time was double of a single block duration. From the kernel aspective, the timeline is shown as in Fig.\ref{fig:scenario1_kernel_opt}.\par
+
+ The results listed in table\ref{table:scenario1_result} show that SJF on GPU may not give an optimal average response time. The execution time is dependent on the kernel submission order to the hardware, and it can be reduced if they are reordered properly. In this case, a $100\%$ utilization and a 1.5 times speedup can be achieved by the proposed menthod.\par
+
+
+
 
 \textit{Example.}
 In this example, I tested the scheduling policy with a set of randomly customized concurrent kernels. Figure depicts the block timeline produced by this experiment. As table\ref{table:scenario2_kernel} shows, ten independent concurrent kernels, K1 to K10 were launched concurrently on different streams. In order to fully test the proposed scheduling policy, the block size and grid size are also randomly given to the kernels. Under the naive policy, kernel launching order were default to be K1, K2, K3, K4, K5, K6, K7, K8, K9, K10. Under the SJF policy, the kernel launching order was K3, K5, K1, K8, K9, K4, K6, K10, K2, K7. Under the "EE217" policy, the kernel launching order was K7, K2, K6, K8, K10, K9, K3, K5, K4, K1. The results are listed in table \ref{table:scenario2_result}, in this case, the performance of SJF is the worst among three policies. Like in the previous scenario, the proposed policy increases utilization and speedup execution.\par
@@ -262,16 +275,41 @@ Remember to change the line 13 in "multikernel.cuh" according to the number of S
 
 \textbf{How to get the kernel submisssion order.}
 If you only want to get the submission order of the input concurrent kernels, try: 
-\begin{itemize}
-   \item make
-   \item ./exe [json file] [policy(0:naive, 1:sjf,  2:optimum)]
-\end{itemize}
+
+\fbox{\begin{minipage}{23em}
+\$ make\\
+\$ ./exe [json file] [policy(0:naive, 1:sjf,  2:optimum)]
+\end{minipage}}
+\newline
+
+In the following text box is an example console output from "example4.json":
+
+\fbox{\begin{minipage}{23em}
+# Scheduling policy 2: minimum execution time... \\
+# Initializing resource map...                   \\
+# Starting to fit...\\
+# Kernel submission order:\\ 
+Kernel[0] with kernel\_id(7)\\
+Kernel[1] with kernel\_id(2)\\
+Kernel[2] with kernel\_id(6)\\
+Kernel[3] with kernel\_id(8)\\
+Kernel[4] with kernel\_id(10)\\
+Kernel[5] with kernel\_id(9)\\
+Kernel[6] with kernel\_id(3)\\
+Kernel[7] with kernel\_id(5)\\
+Kernel[8] with kernel\_id(4)\\
+Kernel[9] with kernel\_id(1)\\
+Kernel number: 10
+\end{minipage}}
+\newline
 
 \textbf{How to draw block timeline.} Block timelines are drawn for each SM. Your will get the simulations for all the SMs by:
-\begin{itemize}
-   \item make
-   \item sh run.sh -i [file] -s [policy(0:naive, 1:sjf, 2:optimum]
-\end{itemize}
+
+\fbox{\begin{minipage}{23em}
+\$ make\\
+\$ sh run.sh -i [file] -s [policy(0:naive, 1:sjf, 2:optimum]
+\end{minipage}}
+\newline
 
 In Fig.\ref{fig:example_out}, an example of output timeline for one SM is given. This is the block timeline of scenario 1 under proposed policy.
 \begin{figure}[h]
