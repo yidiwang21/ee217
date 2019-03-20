@@ -7,7 +7,6 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 
-
 \begin{document}
 
 \title{\LARGE \bf GPU Block-Level Scheduling Method for Concurrent Kernels}
@@ -29,7 +28,7 @@ Nowadays, Graphics Processing Units (GPUs) are becoming more and more popular be
 
 Users can make multiple kernels to run simultaneously by creating multiple streams and assigning different independent kernels onto those streams, in order to highly utilize the GPU resources and accelerate execution. The execution unit of a kernel is the thread block. Blocks are created during runtime and the number of blocks are defined by user when launching the kernel. The blocks are distributed to different Multiprocessors (SMs) to be processed. Whether a block can be assigned to a SM and start running is determined by the current available "spaces" of a SM. The limitations are number of threads and the size of shared memory per SM.
 
-The things to consider for a GPU scheduling policy should be different from CPU tasks scheduling. Because GPU resource limitations may stall the blocks in the kernel to run simultaneously, the optimal solution for CPU tasks may not work for GPU cases.
+The things to consider for a GPU scheduling policy should be different from CPU tasks scheduling. For example, Shortest Job First (SJF) is an optimal scheduling policy on CPU for minimum average waiting time (AWT). Because GPU resource limitations may stall the blocks in the kernel to run simultaneously, the optimal solution for CPU tasks may not work for GPU cases.
 
 When a set of concurrent kernels are released, they are actually ordered in a FIFO queue. Because of the resource limitations, the hardware behaviors may differ when the kernels are reodered differently in the queue. For example, Figure 1 
 % TODO:
@@ -44,7 +43,7 @@ The contribution of the project are:
 
 \section{Related Works}
 % TODO:
-
+block scheduling and kernel scheduling
 
 \section{SYSTEMS WORK}
 
@@ -53,25 +52,16 @@ The submission order of concurrent kernels are determined by the resources each 
 \subsection{Dynamic Resource Mapping}
 I created a rectangle to illustrate the resource usage. The y axis represent the number of used threads on one SM, and it has a ceiling of 2048 in the example as showed in Figure 2. The x axis represent the timeline. The rectangle is growable in this direction.  Each rectangle represent a chunk of resources in terms of the number of threads and time. Each time a block is fitted into the map, it will occupy one existing rectangle, and created two more rectangles. Iteratively, the blocks are fitted into the resource map from bottom to top, and left to right.
 \subsection{Growing 2D Bin Packing}
-At initialization, the kernels are sorted with block duration in descending order. Because of the features of the resource map mentioned above, a binary tree is used to store the represented resources of all the sub-rectangles. In the beginning, the size of the root rectangle is determined by the maximum number of threads one SM can accommodate by the execution time of the first block that is going to be fitted. Once a block is assigned, it will occupy the root of a subtree, and the two newly created rectangles are stored into its children. The left child represents the resources above the last assigned block, and the resource is dominant by only factor I considered in this project - the number of available threads on one SM. On the other hand, the right child represents the resources on the right of the block, and it can grow in the direction of time. Note thattThe left child will always be marked "ungrowable" since the current block can not have a longer duration than the previous ones. The situation that a space at the left of another block is found to be the best to grow will never happen, because if the algorithm let it grow, it may overlap with its right occupied spaces.
+At initialization, the kernels are sorted with block duration in descending order. Because of the features of the resource map mentioned above, a binary tree is used to store the represented resources of all the sub-rectangles. In the beginning, the size of the root rectangle is determined by the maximum number of threads one SM can accommodate by the execution time of the first block that is going to be fitted. Once a block is assigned, it will occupy the root of a subtree, and the two newly created rectangles are stored into its children. The left child represents the resources above the last assigned block, and the resource is dominant by only factor I considered in this project - the number of available threads on one SM. On the other hand, the right child represents the resources on the right of the block, and it can grow in the direction of time. Note thattThe left child will always be marked "ungrowable" since the current block can not have a longer duration than the previous ones. The situation that a space at the left of another block is found to be the best to grow will never happen, because if the algorithm let it grow, it may overlap with its right occupied spaces. The time complexity of the algorithm is $O(n^2)$.
 \subsection{Greedy Choice}
 Every time when a block is going to be assigned, the algorithm will search for a "best fit" empty space. If such a space with sufficient resources does not exist, then the algorithm will grow the rectangle that has sufficient resources and has the minimum start point.
 
 
 \section{Baselines}
-\subsection{Parameters} 
-\begin{itemize}
-\item Block duration: it is set in "duration" field in the json file. Measuring unit is millisecond.
-\item Block duration with $duration=0$: this is neglectable (~2us) compared to the set duration.
-\item Block running time: this equals to what is set to "duration", and does not change when block size or grid size is set differently.
-\end{itemize}
-\subsection{Platform}
-\begin{itemize}
-   \item GPU model: GeForce GTX 1070 
-   \item CUDA version: Cuda 10.1
-\end{itemize}
+The experiments are run on GeForce GTX 1070, and the SDK version is CUDA 10.1. Every senario has an input json file, in which the number of kernels, kernel index, grid size, block size, duration and shared memory size are defined. In the experiments all the "shared memory" fields are set to be 0. The "duration", whose measuring unit is millisecond, can be approximated to be the execution time of each block. The block execution time is measured on the GPU using $globaltimer$ register. If the "duration" for each block is set to be 0, the actual block execution time is around 2us, which can be neglected compared to the set duration. When the kernel configurations, such as block size and grid size are changed, the actual block execution time will not change.
 
 \subsection{Resource Limit}
+The following limits are considered for GeForce GTX 1070:
 \begin{itemize}
    \item Number of multiprocessors: : 15
    \item Maximum number of blocks per multiprocessor: 32
@@ -79,137 +69,135 @@ Every time when a block is going to be assigned, the algorithm will search for a
    \item Maximum number of threads per block: 1024
 \end{itemize}
 
-\subsection{Single Kernel}
-\subsubsection{Below the threads number limit}
+\subsection{Single Kernel Scenarios}
+In order to know whether each kernel is delayed by the others, I run a single kernel first. In the first, because the grid size equals to the number of SMs the GTX 1070 has, all 15 blocks can be assigned to SMs at launching, and they finishes at the same time. The execution time of each block equals to the execution time of this kernel. In the second scenario, the first 30 blocks are assigned to 15 SMs, and start running simultaneously. Due to the resource limitation, the last 15 blocks will wait until there are sufficient resources. The execution time of each block is as the same as what is gotten in the first scenario, but the kernel execution time doubles. \newline
+\textit{Scenario 1}
 \begin{itemize}
    \item Duration: 20ms
-   \item Block size: 1024
+   \item Block size: 0 to 1024
    \item Grid size: 15
-   \item Actual running time: ~20ms
-   \item Observation: All 15 blocks can be assigned to SMs at the same time, and they finishes at the same time.
+   \item Actual block running time: 20ms
+   \item Actual kernelg running time: 20ms
 \end{itemize}
-\subsubsection{Exceeding the threads number limit}
+\textit{Scenario 2}
 \begin{itemize}
    \item Duration: $20ms$
-   \item Block size: 1024
+   \item Block size: 0 to 1024
    \item Grid size: 45
-   \item Actual running time: ~20ms
-   \item Observation: In this case, the first 30 blocks are assigned to 15 SMs, and start running simultaneously. Due to the resource limitation, the last 15 blocks will wait until there are sufficient resources.
+   \item Actual block running time: 20ms
+   \item Actual kernel running time: 40ms
 \end{itemize}
 
 
 \section{EVALUATION}
 \subsection{Measurements}
-\begin{itemize}
-   \item Execution time
-   \item Average response time
-   \item Average waiting time
-\end{itemize}
+Three metrics are used here to evaluate the performance the SJF policy and the proposed reordering policy: execution time, average response time (ART), and average waiting time (AWT). For the proposed policy, let's name it as "EE217".
 
+\subsection{Block-level kernel scheduling}
+\textit{Example.}
+% TODO: 
+Figure depicts the block timeline produced by this experiment. As table 1 shows, three independent concurrent kernels, K1, K2, K3 were launched concurrently on different streams. For and simplification and symmetry, their durations are all set to be 20ms and grid size are all multiple of 15, so the same number of blocks of each kernel can be assigned to each SM evenly. If Naive Scheduling Policy (FIFO) was used, the launching order was default. At t = 0, the resources were sufficient, three blocks of K1 would be assigned to a SM, the remaining available number of threads on this SM was 512. Since one block of K2 requires 1024 threads, it could not start running at t = 0. At t = 20, all of the three blocks of k1 finished execution, then K2 could start running, and the number of available threads became 1024. Another four blocks of K3 can be also assigned. At t = 40, blocks which started running at t = 20 finished, then the last block of K3 could start. The blocks were divided into three groups to run, so the total running time was 3 times of a single block duration. The same behaviour was also oberved under SJF scheduling policy.
 
+The proposed scheduling policy, "EE217", reordered the kernels to maximize the resource utilization to reduce the execution time. Under this policy, at t = 0, the resources were sufficient, one block of K2 was assigned to a SM. The remaining available number of threads on this SM became 1024, which was also sufficient for two blocks of K1 to run simultaneously. At t = 20, all of the blocks which started at t = 0 finished. There were sufficient resources for all of the rest. The blocks were only divided into two groups, so the total running time was double of a single block duration.
 
+ The results showed that SJF on GPU may not give an optimal average response time. The execution time is dependent on the kernel submission order to the hardware, and it can be reduced if they are reordered properly.
 
-
-\subsection{Headings, etc}
-
-Text heads organize the topics on a relational, hierarchical basis. For example, the paper title is the primary text head because all subsequent material relates and elaborates on this one topic. If there are two or more sub-topics, the next level head (uppercase Roman numerals) should be used and, conversely, if there are not at least two sub-topics, then no subheads should be introduced. Styles named ÒHeading 1Ó, ÒHeading 2Ó, ÒHeading 3Ó, and ÒHeading 4Ó are prescribed.
-
-\subsection{Figures and Tables}
-
-Positioning Figures and Tables: Place figures and tables at the top and bottom of columns. Avoid placing them in the middle of columns. Large figures and tables may span across both columns. Figure captions should be below the figures; table heads should appear above the tables. Insert figures and tables after they are cited in the text. Use the abbreviation ÒFig. 1Ó, even at the beginning of a sentence.
-
-\begin{table}[h]
-\caption{An Example of a Table}
-\label{table_example}
-\begin{center}
-\begin{tabular}{|c||c|}
-\hline
-One & Two\\
-\hline
-Three & Four\\
-\hline
-\end{tabular}
-\end{center}
+\begin{table}[ht]
+   \caption{Kernels used in scenario in Fig. } % title of Table
+   \centering
+   \begin{tabular}{|c|c|c|c|}
+   \hline\\
+   \bf Kernels & \bf Grid size & \bf Block size & \bf Duration(ms)\\
+   \hline\\
+   K1 & 45 & 512 & 20 \\
+   K2 & 15 & 1024 & 20\\ 
+   K3 & 75 & 256 & 20 \\
+   \hline
+   \end{tabular}
+   \label{table:scenario1_kernel}
 \end{table}
 
+\begin{table*}[ht]
+   \caption{Kernels used in scenario in Fig. } % title of Table
+   \centering
+   \begin{tabular}{|c|c|c|c|c|c|}
+   \hline\\
+   \bf Policy & \bf Execution time(ms)& \bf ART(ms) & \bf AWT(ms) & \bf Speedup & \bf Utilization \\
+   \hline\\
+   FIFO & 60 & 40 & 13.33 & 1x & 66.67$\%$ \\
+   SJF & 60 & 40 & 13.33 & 1x & 66.67$\%$\\ 
+   EE217 & 40 & 20 & 6.67 & 1.5x & 100$\%$\\
+   \hline
+   \end{tabular}
+   \label{table:scenario1_result}
+\end{table*}
 
-   \begin{figure}[thpb]
-      \centering
-      \framebox{\parbox{3in}{We suggest that you use a text box to insert a graphic (which is ideally a 300 dpi TIFF or EPS file, with all fonts embedded) because, in an document, this method is somewhat more stable than directly inserting a picture.
-}}
-      %\includegraphics[scale=1.0]{figurefile}
-      \caption{Inductance of oscillation winding on amorphous
-       magnetic core versus DC bias magnetic field}
-      \label{figurelabel}
-   \end{figure}
-   
 
-Figure Labels: Use 8 point Times New Roman for Figure labels. Use words rather than symbols or abbreviations when writing Figure axis labels to avoid confusing the reader. As an example, write the quantity ÒMagnetizationÓ, or ÒMagnetization, MÓ, not just ÒMÓ. If including units in the label, present them within parentheses. Do not label axes only with units. In the example, write ÒMagnetization (A/m)Ó or ÒMagnetization {A[m(1)]}Ó, not just ÒA/mÓ. Do not label axes with a ratio of quantities and units. For example, write ÒTemperature (K)Ó, not ÒTemperature/K.Ó
+\textit{Example.}
+%TODO:
+In this example, I tested the scheduling policy with a set of randomly customized concurrent kernels. Figure depicts the block timeline produced by this experiment. As table 3 shows, ten independent concurrent kernels, K1 to K10 were launched concurrently on different streams. In order to fully test the proposed scheduling policy, the block size and grid size are also randomly given to the kernels. Under the naive policy, kernel launching order were default to be K1, K2, K3, K4, K5, K6, K7, K8, K9, K10. Under the SJF policy, the kernel launching order was K3, K5, K1, K8, K9, K4, K6, K10, K2, K7. Under the "EE217" policy, the kernel launching order was K7, K2, K6, K8, K10, K9, K3, K5, K4, K1.
+
+\begin{table}[ht]
+   \caption{Kernels used in scenario in Fig. } % title of Table
+   \centering
+   \begin{tabular}{|c|c|c|c|}
+   \hline\\
+   \bf Kernels & \bf Grid size & \bf Block size & \bf Duration(ms)\\
+   \hline\\
+   K1 & 48 & 512 & 20 \\
+   K2 & 3 & 256 & 50\\ 
+   K3 & 17 & 256 & 10 \\
+   K4 & 15 & 1024 & 35 \\
+   K5 & 23 & 128 & 15 \\ 
+   K6 & 10 & 512 & 40 \\
+   K7 & 1 & 1024 & 80 \\
+   K8 & 30 & 256 & 20\\ 
+   K9 & 12 & 128 & 25 \\
+   K10 & 47 & 512 & 40 \\
+   \hline
+   \end{tabular}
+   \label{table:scenario2_kernel}
+\end{table}
+
+\begin{table*}[ht]
+   \caption{Kernels used in scenario in Fig. } % title of Table
+   \centering
+   \begin{tabular}{|c|c|c|c|c|c|}
+   \hline\\
+   \bf Policy & \bf Execution time(ms)& \bf ART(ms) & \bf AWT(ms) & \bf Speedup & \bf Utilization \\
+   \hline\\
+   FIFO & 115 & 57.5 & 22 & 1x & $\%$ \\
+   SJF & 155 & 25.5 & 25.5 & 0.74x & $\%$ \\ 
+   EE217 & 95 & 60 & 19.5 & 1.21x & $\%$ \\
+   \hline
+   \end{tabular}
+   \label{table:scenario1_result}
+\end{table*}
+
+\subsection{Experiment with shared memory}
+
+
+
 
 \section{CONCLUSIONS}
 
-A conclusion section is not required. Although a conclusion may review the main points of the paper, do not replicate the abstract as the conclusion. A conclusion might elaborate on the importance of the work or suggest applications and extensions. 
-
-\addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
-                                  % on the last page of the document manually. It shortens
-                                  % the textheight of the last page by a suitable amount.
-                                  % This command does not take effect until the next page
-                                  % so it should come on the page before the last. Make
-                                  % sure that you do not shorten the textheight too much.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{APPENDIX}
-
-Appendixes should appear before the acknowledgment.
-
-\section*{ACKNOWLEDGMENT}
-
-The preferred spelling of the word ÒacknowledgmentÓ in America is without an ÒeÓ after the ÒgÓ. Avoid the stilted expression, ÒOne of us (R. B. G.) thanks . . .Ó  Instead, try ÒR. B. G. thanksÓ. Put sponsor acknowledgments in the unnumbered footnote on the first page.
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-References are important to the reader; therefore, each citation must be complete and correct. If at all possible, references should be commonly available publications.
-
-
+Remember to change the line 13 in "multikernel.cuh" according to the number of SMs of your GPU.
+\textit{How to get the kernel submisssion order.}
+If you only want to get the submission order of the input concurrent kernels, you can run with: 
+\begin{itemize}
+   \item make
+   \item ./exe [json file] [scheduling policy(0:naive, 1:sjf,  2:optimum)]
+\end{itemize}
+\textit{How to draw block timeline.} Block timelines are drawn for each SM. Your will get the simulations for all the SMs if you run with:
+\begin{itemize}
+   \item make
+   \item sh run.sh -i [file] -s [scheduling policy(0:naive, 1:sjf, 2:optimum]
+\end{itemize}
 
 \begin{thebibliography}{99}
 
 \bibitem{c1} G. O. Young, ÒSynthetic structure of industrial plastics (Book style with paper title and editor),Ó 	in Plastics, 2nd ed. vol. 3, J. Peters, Ed.  New York: McGraw-Hill, 1964, pp. 15Ð64.
-\bibitem{c2} W.-K. Chen, Linear Networks and Systems (Book style).	Belmont, CA: Wadsworth, 1993, pp. 123Ð135.
-\bibitem{c3} H. Poor, An Introduction to Signal Detection and Estimation.   New York: Springer-Verlag, 1985, ch. 4.
-\bibitem{c4} B. Smith, ÒAn approach to graphs of linear forms (Unpublished work style),Ó unpublished.
-\bibitem{c5} E. H. Miller, ÒA note on reflector arrays (Periodical styleÑAccepted for publication),Ó IEEE Trans. Antennas Propagat., to be publised.
-\bibitem{c6} J. Wang, ÒFundamentals of erbium-doped fiber amplifiers arrays (Periodical styleÑSubmitted for publication),Ó IEEE J. Quantum Electron., submitted for publication.
-\bibitem{c7} C. J. Kaufman, Rocky Mountain Research Lab., Boulder, CO, private communication, May 1995.
-\bibitem{c8} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ÒElectron spectroscopy studies on magneto-optical media and plastic substrate interfaces(Translation Journals style),Ó IEEE Transl. J. Magn.Jpn., vol. 2, Aug. 1987, pp. 740Ð741 [Dig. 9th Annu. Conf. Magnetics Japan, 1982, p. 301].
-\bibitem{c9} M. Young, The Techincal Writers Handbook.  Mill Valley, CA: University Science, 1989.
-\bibitem{c10} J. U. Duncombe, ÒInfrared navigationÑPart I: An assessment of feasibility (Periodical style),Ó IEEE Trans. Electron Devices, vol. ED-11, pp. 34Ð39, Jan. 1959.
-\bibitem{c11} S. Chen, B. Mulgrew, and P. M. Grant, ÒA clustering technique for digital communications channel equalization using radial basis function networks,Ó IEEE Trans. Neural Networks, vol. 4, pp. 570Ð578, July 1993.
-\bibitem{c12} R. W. Lucky, ÒAutomatic equalization for digital communication,Ó Bell Syst. Tech. J., vol. 44, no. 4, pp. 547Ð588, Apr. 1965.
-\bibitem{c13} S. P. Bingulac, ÒOn the compatibility of adaptive controllers (Published Conference Proceedings style),Ó in Proc. 4th Annu. Allerton Conf. Circuits and Systems Theory, New York, 1994, pp. 8Ð16.
-\bibitem{c14} G. R. Faulhaber, ÒDesign of service systems with priority reservation,Ó in Conf. Rec. 1995 IEEE Int. Conf. Communications, pp. 3Ð8.
-\bibitem{c15} W. D. Doyle, ÒMagnetization reversal in films with biaxial anisotropy,Ó in 1987 Proc. INTERMAG Conf., pp. 2.2-1Ð2.2-6.
-\bibitem{c16} G. W. Juette and L. E. Zeffanella, ÒRadio noise currents n short sections on bundle conductors (Presented Conference Paper style),Ó presented at the IEEE Summer power Meeting, Dallas, TX, June 22Ð27, 1990, Paper 90 SM 690-0 PWRS.
-\bibitem{c17} J. G. Kreifeldt, ÒAn analysis of surface-detected EMG as an amplitude-modulated noise,Ó presented at the 1989 Int. Conf. Medicine and Biological Engineering, Chicago, IL.
-\bibitem{c18} J. Williams, ÒNarrow-band analyzer (Thesis or Dissertation style),Ó Ph.D. dissertation, Dept. Elect. Eng., Harvard Univ., Cambridge, MA, 1993. 
-\bibitem{c19} N. Kawasaki, ÒParametric study of thermal and chemical nonequilibrium nozzle flow,Ó M.S. thesis, Dept. Electron. Eng., Osaka Univ., Osaka, Japan, 1993.
-\bibitem{c20} J. P. Wilkinson, ÒNonlinear resonant circuit devices (Patent style),Ó U.S. Patent 3 624 12, July 16, 1990. 
-
-
-
-
-
-
 \end{thebibliography}
 
 

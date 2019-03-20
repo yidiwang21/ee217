@@ -14,8 +14,6 @@
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 
-// #define DRAW_TIMELINE
-
 // binary tree:
 // left subtree: spaces in the left of below part
 // right subtree: spaces in the right of above part
@@ -28,7 +26,7 @@ typedef struct Node{
     bool used;
     bool closed;
     int height;
-    uint64_t width;
+    int width;
     int kernel_id;  // 0 for empty space
     bool growable;  // left always cannot grow
     struct Node *left;
@@ -71,12 +69,13 @@ typedef struct {
 class MultiKernel
 {   
 public:
-    MultiKernel(char *fn, int sp);
+    MultiKernel(char *fn, int sp, int draw);
     // ~MultiKernel();
     void kernelLauncher();
 
     int kernel_num;
     int sched_policy;    
+    int draw_timeline;
     cudaDeviceProp devProp;
 private:
     KernelInfo *kernel_list;

@@ -8,7 +8,8 @@
 
 int main (int argc, char *argv[]) {
     int sp = 2;
-    std::string filename = "example1.json";
+    int draw = 0;
+    std::string filename = "example4.json";
     if (access( filename.c_str(), F_OK ) == -1) { fprintf(stderr, "# File doesn't exist!\n"); exit(-1); }
 
     if (argc == 2) filename = argv[1];
@@ -16,8 +17,9 @@ int main (int argc, char *argv[]) {
         filename = argv[1];
         sp = atoi(argv[2]);
         if (sp != 2 && sp != 1 && sp != 0) fprintf(stderr, "# Scheduling policy must be 0 (naive) or 1 (minimum AWT) or 2 (minimum execution time)\n");
-    }
-    else if (argc > 3) { fprintf(stderr, "# Usage: ./exe [file] [sched_policy]\n"); exit(0); }
+    }else if (argc == 3) draw = 0;
+    else if (argc == 4) draw = atoi(argv[3]);
+    else if (argc > 4) { fprintf(stderr, "# Usage: ./exe [file] [sched_policy]\n"); exit(0); }
 
     char *fn = (char *)malloc(sizeof(char) * (filename.length() + 1));
     strcpy(fn, filename.c_str());

@@ -8,6 +8,7 @@ MultiKernel::MultiKernel(char *config_file, int sp) {
         cleanUp();
     }
     sched_policy = sp;
+    draw_timeline = draw;
 }
 
 Node* MultiKernel::newNode() {
@@ -20,14 +21,11 @@ Node* MultiKernel::newNode() {
 Node* MultiKernel::splitNode(Node *node, int w, int h, int kid) {
     node->used = 1;
     node->kernel_id = kid;
-    printf("$$$$$ Node height is %d\n", node->height);
 
     node->left = newNode();
     node->left->used = 0;
     node->left->growable = 0;
-    // FIXME: 
     node->left->kernel_id = 0;
-    // (*node)->left->kernel_id = (*node)->kernel_id;
     node->left->parent = node;
     node->left->left = NULL;
     node->left->right = NULL;
@@ -58,8 +56,6 @@ Node* MultiKernel::splitNode(Node *node, int w, int h, int kid) {
 
     // FIXME: tunning
     if (node->start_point.x + node->width == root->width && node != root) {
-        printf("1111111111111111111111111111111\n");
-        // node->right->used = 1;
         node->right->width = 0;
         node->right->height = 0;
         node->right->closed = 1;
@@ -88,11 +84,11 @@ Node* MultiKernel::findBestFit(Node *node, int w, int h) {
     if (node->used == 1) {
         Node *ret;
         if (ret = findBestFit(node->right, w, h)){
-            printf("right\n");
+            // printf("right\n");
             return ret;
         }
         else {
-            printf("left\n");
+            // printf("left\n");
             return findBestFit(node->left, w, h);
         }
     }else if ((w <= node->width) && (h <= node->height)) {
@@ -124,34 +120,8 @@ void MultiKernel::updateParentsRight(Node *node, int w, int h, int stp) {
                 printf("Update height of node, whose parent is %d\n", node->parent->kernel_id);
                 node->height -= h;
                 printf("New height = %d\n", node->height);
-            }
-            if (node->right != NULL) {
-
-            }
-                
+            }       
         }
-        
-        // printf("111111111111111111111111111111\n");
-        // if (node->parent != NULL) {
-        //     printf("1 pass\n");
-        // }else {
-        //     printf("1 fail\n");
-        //     continue;
-        // }
-        // printf("33333333333333333333333333\n");
-        // if (node->parent->parent != NULL) {
-        //     printf("2 pass\n");
-        // }else {
-        //     printf("2 fail\n");
-        //     continue;
-        // }
-        // printf("444444444444444444444444444\n");
-        // if (node->parent->parent->right != NULL) {
-        //     printf("3 pass\n");
-        // }else {
-        //     printf("3 fail\n");
-        //     continue;
-        // }
         if (node->parent == NULL || node->parent->parent == NULL || node->parent->parent->right == NULL) continue;
         node = node->parent->parent->right;
     }
@@ -328,7 +298,7 @@ void MultiKernel::scheduler() {
         Node *node;
         Node *block_node;
         printf("=======================================\n");
-        printf("Assigning block %d:\n", i+1);
+        printf("# Assigning block %d:\n", i+1);
         node = findBestFit(root, block_list[i].duration, block_list[i].block_size);
         if (node != NULL) {
             printf("Found an empty space!\n");
@@ -344,13 +314,9 @@ void MultiKernel::scheduler() {
             printf("right space width = %d\n", block_node->right->width);
             printf("right space height = %d\n", block_node->right->height);
             printf("above space width = %d\n", block_node->left->width);
-            printf("above space height = %d\n", block_node->left->height); 
-
+            printf("above space height = %d\n", block_node->left->height);
         }
         else if (node == NULL ){
-            // TODO: must find the rectangle whose space is going to be overlapped with the growing node!
-            // updateParentsRight(node, node->width, node->height, node->start_point.x);
-
             printf("Growing node... height = %d\n", block_list[i].block_size);
             int min = findMinUnusedToGrow(root, block_list[i].block_size);
             printf("The min x to grow is %d\n", min);
@@ -370,7 +336,6 @@ void MultiKernel::scheduler() {
             printf("above space width = %d\n", block_node->left->width);
             printf("above space height = %d\n", block_node->left->height); 
         }
-        printf("####### root->right->height = %d\n", root->right->height);
     }
     sortStartTimeAscending();
 }
@@ -475,9 +440,8 @@ void MultiKernel::kernelLauncher() {
     }
     cudaDeviceSynchronize();
 
-    #ifdef DRAW_TIMELINE
-    printBlocks();
-    #endif
+    if (draw_timeline == 1)
+        printBlocks();
 }
 
 void MultiKernel::printBlocks() {

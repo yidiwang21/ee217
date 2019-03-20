@@ -2,6 +2,7 @@
 
 filename=
 sched_policy=0  # 0 for naive, 1 for optimal
+draw=1
 
 while [ -n "$1" ]; do
     case $1 in 
@@ -19,6 +20,6 @@ while [ -n "$1" ]; do
     shift
 done
 
-./exe ${filename} ${sched_policy} > log.txt
+./exe ${filename} ${sched_policy} ${draw}$> log.txt
 
 python3 draw_blocks_timeline.py log.txt
