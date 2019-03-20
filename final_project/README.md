@@ -3,7 +3,14 @@
 * [cJSON](https://github.com/DaveGamble/cJSON)
 
 ## Usage
+To draw block timelines for all SMs:
+```make```
 ```sh run.sh -i [filename] -s [scheduling policy: 0 for naive, 1 for minimum AWT, 2 for minimum exe time]```
+
+To just show the kernel submission order:
+```make```
+```./exe [filename] [scheduling policy: 0 for naive, 1 for minimum AWT, 2 for minimum exe time]```
+
 ## Platform
 * GPU model:    GeForce GTX 1070 </br>
 * CUDA version: Cuda 10.1

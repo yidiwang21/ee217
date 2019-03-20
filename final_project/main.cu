@@ -34,7 +34,7 @@ int main (int argc, char *argv[]) {
     fclose(f);
     fc[fsize] = 0;
 
-    MultiKernel multi_kernel(fc, sp);
+    MultiKernel multi_kernel(fc, sp, draw);
     multi_kernel.kernelLauncher();
     
     return 0;

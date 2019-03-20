@@ -1,7 +1,7 @@
 #include "multikernel.cuh"
 
 // init MultiKernel class with the input arguments
-MultiKernel::MultiKernel(char *config_file, int sp) {
+MultiKernel::MultiKernel(char *config_file, int sp, int draw) {
     parser = cJSON_Parse(config_file);
     if (parser == NULL) {
         fprintf(stderr, "# Invalid kernel config file!\n");
@@ -257,10 +257,6 @@ void MultiKernel::sortStartTimeAscending() {
             }
         }
     } while(swapped); 
-
-    for (int k = 0; k < kernel_num; k++) {
-        printf("start time of kernel[%d] with kernel_id(%d): %d\n", k, kernel_list[k].kernel_id, kernel_list[k].start_time);
-    }
 }
 
 void MultiKernel::sortDurationAscending() {
@@ -304,8 +300,6 @@ void MultiKernel::scheduler() {
             printf("Found an empty space!\n");
             block_node = splitNode(node, block_list[i].duration, block_list[i].block_size, block_list[i].kernel_id);
             block_list[i].start_time = block_node->start_point.x;
-            if (block_node != root)
-                printf("The parent of node is %d\n", block_node->parent->kernel_id);
             printf("x = %d\n", block_node->start_point.x);
             printf("y = %d\n", block_node->start_point.y);
             
@@ -419,6 +413,12 @@ void MultiKernel::kernelLauncher() {
         printf("# Naive scheduling policy...\n");
     }
 
+    printf("# Kernel submission order: \n");
+    for (int k = 0; k < kernel_num; k++) {
+        // printf("start time of kernel[%d] with kernel_id(%d): %d\n", k, kernel_list[k].kernel_id, kernel_list[k].start_time);
+        printf("Kernel[%d] with kernel_id(%d)\n", k, kernel_list[k].kernel_id);
+    }
+
     cudaError_t cuda_ret;
 
     cudaStream_t *streams;
@@ -426,8 +426,8 @@ void MultiKernel::kernelLauncher() {
     for (int i = 0; i < kernel_num; i++) cudaStreamCreateWithFlags(&streams[i], cudaStreamNonBlocking);
     cudaDeviceSynchronize();
 
-    printf("Launching kernel...\n"); fflush(stdout);
     printf("Kernel number: %d\n", kernel_num);
+    printf("Launching kernel...\n"); fflush(stdout);
     for (int i = 0; i < kernel_num; i++) {
         GPUSpin <<<kernel_list[i].grid_size, kernel_list[i].block_size, 0, streams[i]>>> (kernel_list[i].duration * 1000 * 1000, kernel_list[i].block_times_d, kernel_list[i].block_smids_d);
     }
