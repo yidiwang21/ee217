@@ -6,10 +6,13 @@
 \usepackage{times}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
 
 \begin{document}
 
-\title{\LARGE \bf GPU Block-Level Scheduling Method for Concurrent Kernels}
+\title{\LARGE \bf A GPU Block-Level Scheduling Method for Concurrent Kernels}
 
 \author{\IEEEauthorblockN{Yidi Wang} \\
 \IEEEauthorblockA{University of California, Riverside\\
@@ -28,10 +31,9 @@ Nowadays, Graphics Processing Units (GPUs) are becoming more and more popular be
 
 Users can make multiple kernels to run simultaneously by creating multiple streams and assigning different independent kernels onto those streams, in order to highly utilize the GPU resources and accelerate execution. The execution unit of a kernel is the thread block. Blocks are created during runtime and the number of blocks are defined by user when launching the kernel. The blocks are distributed to different Multiprocessors (SMs) to be processed. Whether a block can be assigned to a SM and start running is determined by the current available "spaces" of a SM. The limitations are number of threads and the size of shared memory per SM.
 
-The things to consider for a GPU scheduling policy should be different from CPU tasks scheduling. For example, Shortest Job First (SJF) is an optimal scheduling policy on CPU for minimum average waiting time (AWT). Because GPU resource limitations may stall the blocks in the kernel to run simultaneously, the optimal solution for CPU tasks may not work for GPU cases.
+The default GPU scheduling policy is well illustrated in the prior work~\cite{c1}. The things to consider for a GPU scheduling policy should be different from CPU tasks scheduling. For example, Shortest Job First (SJF) is an optimal scheduling policy on CPU for minimum average waiting time (AWT). Because GPU resource limitations may stall the blocks in the kernel to run simultaneously, the optimal solution for CPU tasks may not work for GPU cases.
 
-When a set of concurrent kernels are released, they are actually ordered in a FIFO queue. Because of the resource limitations, the hardware behaviors may differ when the kernels are reodered differently in the queue. For example, Figure 1 
-% TODO:
+When a set of concurrent kernels are released, they are actually ordered in a FIFO queue. Because of the resource limitations, the hardware behaviors may differ when the kernels are reodered differently in the queue. 
 
 Motivated by the above consideration and scenario, this project proposed a scheduling method for concurrent kernels. The method is based on the analysis of required resources of blocks. 
 The contribution of the project are:
@@ -40,10 +42,6 @@ The contribution of the project are:
    \item Shortest Job First (SJF) scheduling policy is implemented for GPU kernels. Naive approach, SJF approach and the proposed approach are compared in the evaluation part. The results are showed that the proposed approach can speedup execution while SJF is not to be optimum for GPU kernel scheduling.
 \end{itemize}
 
-
-\section{Related Works}
-% TODO:
-block scheduling and kernel scheduling
 
 \section{SYSTEMS WORK}
 
@@ -96,22 +94,22 @@ Three metrics are used here to evaluate the performance the SJF policy and the p
 \subsection{Block-level kernel scheduling}
 \textit{Example.}
 % TODO: 
-Figure depicts the block timeline produced by this experiment. As table 1 shows, three independent concurrent kernels, K1, K2, K3 were launched concurrently on different streams. For and simplification and symmetry, their durations are all set to be 20ms and grid size are all multiple of 15, so the same number of blocks of each kernel can be assigned to each SM evenly. If Naive Scheduling Policy (FIFO) was used, the launching order was default. At t = 0, the resources were sufficient, three blocks of K1 would be assigned to a SM, the remaining available number of threads on this SM was 512. Since one block of K2 requires 1024 threads, it could not start running at t = 0. At t = 20, all of the three blocks of k1 finished execution, then K2 could start running, and the number of available threads became 1024. Another four blocks of K3 can be also assigned. At t = 40, blocks which started running at t = 20 finished, then the last block of K3 could start. The blocks were divided into three groups to run, so the total running time was 3 times of a single block duration. The same behaviour was also oberved under SJF scheduling policy.
+Fig.\ref{fig:scenario1} depicts the block timeline produced by this experiment. Representaton $K_i:j$ means the $j$ th block of kernel $K_i$. As table\ref{table:scenario1_kernel} shows, three independent concurrent kernels, K1, K2, K3 were launched concurrently on different streams. For and simplification and symmetry, their durations are all set to be 20ms and grid size are all multiple of 15, so the same number of blocks of each kernel can be assigned to each SM evenly. If Naive Scheduling Policy (FIFO) was used, the launching order was default. The detailed block timeline on the first SM under FIFO and SJF is shown in Fig.\ref{fig:scenario1_naive}. At t = 0, the resources were sufficient, three blocks of K1 would be assigned to a SM, the remaining available number of threads on this SM was 512. Since one block of K2 requires 1024 threads, it could not start running at t = 0. At t = 20, all of the three blocks of k1 finished execution, then K2 could start running, and the number of available threads became 1024. Another four blocks of K3 can be also assigned. At t = 40, blocks which started running at t = 20 finished, then the last block of K3 could start. The blocks were divided into three groups to run, so the total running time was 3 times of a single block duration. The same behaviour was also oberved under SJF scheduling policy. From the kernel aspective, the timeline is shown as in Fig.\ref{fig:scenario1_kernel_naive}.
 
-The proposed scheduling policy, "EE217", reordered the kernels to maximize the resource utilization to reduce the execution time. Under this policy, at t = 0, the resources were sufficient, one block of K2 was assigned to a SM. The remaining available number of threads on this SM became 1024, which was also sufficient for two blocks of K1 to run simultaneously. At t = 20, all of the blocks which started at t = 0 finished. There were sufficient resources for all of the rest. The blocks were only divided into two groups, so the total running time was double of a single block duration.
+The proposed scheduling policy, "EE217", reordered the kernels to maximize the resource utilization to reduce the execution time. The detailed block timeline on the first SM under FIFO and SJF is shown in Fig.\ref{fig:scenario1_opt}. Under this policy, at t = 0, the resources were sufficient, one block of K2 was assigned to a SM. The remaining available number of threads on this SM became 1024, which was also sufficient for two blocks of K1 to run simultaneously. At t = 20, all of the blocks which started at t = 0 finished. There were sufficient resources for all of the rest. The blocks were only divided into two groups, so the total running time was double of a single block duration. From the kernel aspective, the timeline is shown as in Fig.\ref{fig:scenario1_kernel_opt}.
 
- The results showed that SJF on GPU may not give an optimal average response time. The execution time is dependent on the kernel submission order to the hardware, and it can be reduced if they are reordered properly.
+ The results listed in table\ref{table:scenario1_result} show that SJF on GPU may not give an optimal average response time. The execution time is dependent on the kernel submission order to the hardware, and it can be reduced if they are reordered properly. In this case, a $100\%$ utilization and a 1.5 times speedup can be achieved by the proposed menthod.
 
 \begin{table}[ht]
-   \caption{Kernels used in scenario in Fig. } % title of Table
+   \caption{Kernels used in scenario in Fig.\ref{fig:scenario1}}
    \centering
    \begin{tabular}{|c|c|c|c|}
-   \hline\\
+   \hline
    \bf Kernels & \bf Grid size & \bf Block size & \bf Duration(ms)\\
-   \hline\\
+   \hline
    K1 & 45 & 512 & 20 \\
    K2 & 15 & 1024 & 20\\ 
-   K3 & 75 & 256 & 20 \\
+   K3 & 90 & 256 & 20 \\
    \hline
    \end{tabular}
    \label{table:scenario1_kernel}
@@ -121,9 +119,9 @@ The proposed scheduling policy, "EE217", reordered the kernels to maximize the r
    \caption{Kernels used in scenario in Fig. } % title of Table
    \centering
    \begin{tabular}{|c|c|c|c|c|c|}
-   \hline\\
+   \hline
    \bf Policy & \bf Execution time(ms)& \bf ART(ms) & \bf AWT(ms) & \bf Speedup & \bf Utilization \\
-   \hline\\
+   \hline
    FIFO & 60 & 40 & 13.33 & 1x & 66.67$\%$ \\
    SJF & 60 & 40 & 13.33 & 1x & 66.67$\%$\\ 
    EE217 & 40 & 20 & 6.67 & 1.5x & 100$\%$\\
@@ -132,18 +130,43 @@ The proposed scheduling policy, "EE217", reordered the kernels to maximize the r
    \label{table:scenario1_result}
 \end{table*}
 
+\begin{figure*}[h]
+   \centering
+   \begin{subfigure}{0.48\textwidth}
+       \includegraphics[width=\textwidth, height=120pt]{figs/scenario1_naive.png}
+       \caption{Block timeline of naive and SJF}
+       \label{fig:scenario1_naive}
+   \end{subfigure}
+   \begin{subfigure}{0.48\textwidth}
+       \includegraphics[width=\textwidth, height=120pt]{figs/scenario1_opt.png}
+       \caption{Block timeline of optimum}
+       \label{fig:scenario1_opt}
+   \end{subfigure}
+   \begin{subfigure}{0.48\textwidth}
+      \includegraphics[width=\textwidth, height=90pt]{figs/scenario1_kernel_naive.png}
+      \caption{Block timeline of optimum}
+      \label{fig:scenario1_kernel_naive}
+  \end{subfigure}
+   \begin{subfigure}{0.48\textwidth}
+      \includegraphics[width=\textwidth, height=90pt]{figs/scenario1_kernel_opt.png}
+      \caption{Block timeline of optimum}
+      \label{fig:scenario1_kernel_opt}
+   \end{subfigure}
+   \caption{Block timeline in scenario 1 on one SM}
+   \label{fig:scenario1}
+\end{figure*}
 
 \textit{Example.}
 %TODO:
-In this example, I tested the scheduling policy with a set of randomly customized concurrent kernels. Figure depicts the block timeline produced by this experiment. As table 3 shows, ten independent concurrent kernels, K1 to K10 were launched concurrently on different streams. In order to fully test the proposed scheduling policy, the block size and grid size are also randomly given to the kernels. Under the naive policy, kernel launching order were default to be K1, K2, K3, K4, K5, K6, K7, K8, K9, K10. Under the SJF policy, the kernel launching order was K3, K5, K1, K8, K9, K4, K6, K10, K2, K7. Under the "EE217" policy, the kernel launching order was K7, K2, K6, K8, K10, K9, K3, K5, K4, K1.
+In this example, I tested the scheduling policy with a set of randomly customized concurrent kernels. Figure depicts the block timeline produced by this experiment. As table\ref{table:scenario2_kernel} shows, ten independent concurrent kernels, K1 to K10 were launched concurrently on different streams. In order to fully test the proposed scheduling policy, the block size and grid size are also randomly given to the kernels. Under the naive policy, kernel launching order were default to be K1, K2, K3, K4, K5, K6, K7, K8, K9, K10. Under the SJF policy, the kernel launching order was K3, K5, K1, K8, K9, K4, K6, K10, K2, K7. Under the "EE217" policy, the kernel launching order was K7, K2, K6, K8, K10, K9, K3, K5, K4, K1. The results are listed in table \ref{table:scenario2_result}, in this case, the performance of SJF is the worst among three policies. Like in the previous scenario, the proposed policy increases utilization and speedup execution.
 
 \begin{table}[ht]
    \caption{Kernels used in scenario in Fig. } % title of Table
    \centering
    \begin{tabular}{|c|c|c|c|}
-   \hline\\
+   \hline
    \bf Kernels & \bf Grid size & \bf Block size & \bf Duration(ms)\\
-   \hline\\
+   \hline
    K1 & 48 & 512 & 20 \\
    K2 & 3 & 256 & 50\\ 
    K3 & 17 & 256 & 10 \\
@@ -160,47 +183,89 @@ In this example, I tested the scheduling policy with a set of randomly customize
 \end{table}
 
 \begin{table*}[ht]
-   \caption{Kernels used in scenario in Fig. } % title of Table
+   \caption{Kernels used in scenario of random kernels} % title of Table
    \centering
    \begin{tabular}{|c|c|c|c|c|c|}
-   \hline\\
+   \hline
    \bf Policy & \bf Execution time(ms)& \bf ART(ms) & \bf AWT(ms) & \bf Speedup & \bf Utilization \\
-   \hline\\
-   FIFO & 115 & 57.5 & 22 & 1x & $\%$ \\
-   SJF & 155 & 25.5 & 25.5 & 0.74x & $\%$ \\ 
-   EE217 & 95 & 60 & 19.5 & 1.21x & $\%$ \\
+   \hline
+   FIFO & 115 & 57.5 & 22 & 1x & 74.7$\%$ \\
+   SJF & 155 & 25.5 & 25.5 & 0.74x & 55.42$\%$ \\ 
+   EE217 & 95 & 60 & 19.5 & 1.21x & 90.43$\%$ \\
    \hline
    \end{tabular}
-   \label{table:scenario1_result}
+   \label{table:scenario2_result}
 \end{table*}
 
-\subsection{Experiment with shared memory}
+\subsection{Experiment on shared memory}
+Experiments with some shared memory are also done. As listed in table.\ref{table:shmem_kernel}, a series of same kernels were launched, but the execution time is difficult to be predicted. The running results are shown in Fig. which show that:
+\begin{itemize}
+   \item We can observe from Fig.\ref{fig:shmem_case3} that execution time of independent blocks are increased due to shared memory access. 
+   \item We can observe from Fig.\ref{fig:shmem_case4} that number of blocks that can run together on the same SM is limited due to the shared memory limit.
+\end{itemize}
 
+\begin{table*}[ht]
+   \caption{Kernels used in scenario in Fig. }
+   \centering
+   \begin{tabular}{|c|c|c|c|c|c|}
+   \hline
+    & \bf Kernel number & \bf grid size & \bf block size & \bf shared memory size(KB) \\
+    \hline
+   Case 1 & 1 & 15 & 32 & 1024   \\
+   Case 2 & 3 & 15 & 32 & 1024  \\ 
+   Case 3 & 1 & 15 & 32 & 16384  \\
+   Case 4 & 7 & 15 & 32 & 16384  \\
+   \hline
+   \end{tabular}
+   \label{table:shmem_kernel}
+\end{table*}
 
+\begin{figure*}[h]
+   \centering
+   \begin{subfigure}{0.4\textwidth}
+       \includegraphics[width=\textwidth, height=60pt]{figs/shmem_1024_baseline.png}
+       \caption{Case 1}
+       \label{fig:shmem_case1}
+   \end{subfigure}
+   \begin{subfigure}{0.4\textwidth}
+       \includegraphics[width=\textwidth, height=60pt]{figs/shmem_16384_baseline.png}
+       \caption{Case 3}
+       \label{fig:shmem_case3}
+   \end{subfigure}
+   \begin{subfigure}{0.4\textwidth}
+      \includegraphics[width=\textwidth, height=80pt]{figs/shmem_1024.png}
+      \caption{Case 2}
+      \label{fig:shmem_case2}
+  \end{subfigure}
+   \begin{subfigure}{0.48\textwidth}
+      \includegraphics[width=\textwidth, height=120pt]{figs/shmem_16384.png}
+      \caption{Case 4}
+      \label{fig:shmem_case4}
+   \end{subfigure}
+   \caption{Timeline with shared memory on one SM}
+   \label{fig:scenario1}
+\end{figure*}
 
 
 \section{CONCLUSIONS}
+With the support for parallelism, GPUs can utilize the resources more efficiently with a higher processing speed. As the observation shows in my work, the hardware decision and behaviors depends on the submission order of kernels. This project shows that a scheduling policy that reorders the kernels based on the analysis of kernel blocks is feasible. With this scheduling policy, I have successfully accelerated concurrent kernel execution and increase GPU resource utilizations compared to the naive kernel submission order and SJF. Also, I show that there is additional performance interference due to contention on shared memory.
 
 \section*{APPENDIX}
-Remember to change the line 13 in "multikernel.cuh" according to the number of SMs of your GPU.
-\textit{How to get the kernel submisssion order.}
+Remember to change the line 13 in "multikernel.cuh" according to the number of SMs of your GPU.\newline
+\textbf{How to get the kernel submisssion order.}
 If you only want to get the submission order of the input concurrent kernels, you can run with: 
 \begin{itemize}
    \item make
    \item ./exe [json file] [scheduling policy(0:naive, 1:sjf,  2:optimum)]
 \end{itemize}
-\textit{How to draw block timeline.} Block timelines are drawn for each SM. Your will get the simulations for all the SMs if you run with:
+\textbf{How to draw block timeline.} Block timelines are drawn for each SM. Your will get the simulations for all the SMs if you run with:
 \begin{itemize}
    \item make
    \item sh run.sh -i [file] -s [scheduling policy(0:naive, 1:sjf, 2:optimum]
 \end{itemize}
 
 \begin{thebibliography}{99}
-
-\bibitem{c1} G. O. Young, ÒSynthetic structure of industrial plastics (Book style with paper title and editor),Ó 	in Plastics, 2nd ed. vol. 3, J. Peters, Ed.  New York: McGraw-Hill, 1964, pp. 15Ð64.
+\bibitem{c1} Tanya Amert, Nathan Otterness, Ming Yang, James H. Anderson, and F. Donelson Smith \emph{GPU Scheduling on the NVIDIA TX2: Hidden Details Revealed} (IEEE RTSS, 2017, Paris, France)
 \end{thebibliography}
-
-
-
 
 \end{document}
