@@ -311,30 +311,30 @@ void MultiKernel::scheduler() {
             
             // FIXME:
             updateParentsRight(block_node, (block_node)->width, (block_node)->height, (block_node)->start_point.x);
-            printf("right space width = %d\n", block_node->right->width);
-            printf("right space height = %d\n", block_node->right->height);
-            printf("above space width = %d\n", block_node->left->width);
-            printf("above space height = %d\n", block_node->left->height);
+            // printf("right space width = %d\n", block_node->right->width);
+            // printf("right space height = %d\n", block_node->right->height);
+            // printf("above space width = %d\n", block_node->left->width);
+            // printf("above space height = %d\n", block_node->left->height);
         }
         else if (node == NULL ){
             printf("Growing node... height = %d\n", block_list[i].block_size);
             int min = findMinUnusedToGrow(root, block_list[i].block_size);
-            printf("The min x to grow is %d\n", min);
+            // printf("The min x to grow is %d\n", min);
             Node* node_to_grow = searchNode(root, min, NULL);
-            printf("The parent of growing node is %d\n", node_to_grow->parent->kernel_id);
-            printf("found node node->height is %d\n", node_to_grow->height);
+            // printf("The parent of growing node is %d\n", node_to_grow->parent->kernel_id);
+            // printf("found node node->height is %d\n", node_to_grow->height);
 
             block_node = growNode(node_to_grow, block_list[i].duration, block_list[i].block_size, block_list[i].kernel_id);
             block_list[i].start_time = block_node->start_point.x;
             printf("x = %d\n", block_node->start_point.x);
             printf("y = %d\n", block_node->start_point.y);
 
-            // FIXME: 
             updateParentsRight(block_node, (block_node)->width, (block_node)->height, (block_node)->start_point.x);
-            printf("right space width = %d\n", block_node->right->width);
-            printf("right space height = %d\n", block_node->right->height);
-            printf("above space width = %d\n", block_node->left->width);
-            printf("above space height = %d\n", block_node->left->height); 
+
+            // printf("right space width = %d\n", block_node->right->width);
+            // printf("right space height = %d\n", block_node->right->height);
+            // printf("above space width = %d\n", block_node->left->width);
+            // printf("above space height = %d\n", block_node->left->height); 
         }
     }
     sortStartTimeAscending();
