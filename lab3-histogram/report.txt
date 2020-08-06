@@ -1,0 +1,5 @@
+1. Number of global memory reads = size of the input array = N
+
+2. Number of global memory writes = number of bins * number of private histogram = 1024 * 16
+
+3. Number of total atomic operations = number of writes to private histogram + number of writes to final histogram = 1024 * 16 + N

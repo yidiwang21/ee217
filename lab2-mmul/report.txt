@@ -1,0 +1,21 @@
+1. The kernel execution time of [256] is 0.000185s and 0.000547s for the [1024, 64, 1024].
+The time to copy data from device to host is 0.000207s for [256], and 0.001973s for [1024, 64, 1024]
+The size of output matrix in [256] is 256 * 256 = 65536, and in [1024, 64, 1024] is 1048576. So in the second case, the time for copying back the results is much longer.
+With operations to square matrix, the smaller number of phases is needed.
+
+2. 4 times
+
+3. 64 times
+
+4. 
+Tile size               8	          16	        32	        Note
+gpu_tot_sim_cycle       42663       28361    	  56993       Total cycles
+gpu_tot_ipc             455.9732    496.8536    425.1020    Instruction per cycle
+gpgpu_n_load_insn       557056      294912      163840      Total loads to global memory
+gpgpu_n_store_insn      16384       16384       16384       Total stores to global memory
+gpgpu_n_shmem_insn      4786176     4526080	    4399104     Total accesses to shared memory 
+
+5. A tile size of 32 has the smallest number of global memory accesses. A tile size of 8 has the most global memory accesses.
+The smaller the tile size is, the number of threads that are running in parallel is smaller. With less threads, we need to load more times.
+
+6. [16] is the fastest, [32] is the slowest. We can see from the above table, a tile size of 16 has the highest IPC, and the smallest sim cycles. A 32*32 tile size will cause more warp divergence. Also, the shared memory may be not enough.
